@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:UniversalistDergiRC.ViewModels;assembly=UniversalistDergiRC"
+             x:Name="MagazineListPage"
+             BackgroundImage="back2.jpg"
+             x:Class="UniversalistDergiRC.Views.MagazineListView">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     HorizontalOptions="FillAndExpand">
+          
+            <Label Text="Universalist Sayılar"
+                   HorizontalOptions="Center"
+                   FontAttributes="Italic"
+                   FontSize="Medium"></Label>
+            <ListView HasUnevenRows="True"
+                      x:Name="lstMagazines"
+                      SeparatorColor="Red"
+                      ItemsSource="{Binding MagazineIssueList}"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding Path=BindingContext.RefreshCommand,
+                       Source={x:Reference MagazineListPage}}"
+                      IsRefreshing="{Binding IsRefreshing, Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="7*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0"
+                                       BackgroundColor="Transparent"
+                                       Source="{Binding CoverPage.SourceURL}"
+                                       Margin="5,1,1,1" />
+                                <StackLayout Grid.Column="1"
+                                             Margin="5,0,0,0"
+                                             VerticalOptions="Center"
+                                             HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding Title}"
+                                           FontSize="Medium"
+                                           FontAttributes="Bold"
+                                           TextColor="Orange"></Label>
+                                    <Label Text="{Binding Period}"
+                                           TextColor="White"></Label>
+                                    <Label Text="{Binding PageCount, StringFormat='Sayfa Sayısı {0}'}"
+                                           FontSize="Micro"
+                                           TextColor="Yellow"></Label>
+                                </StackLayout>
+                                <Button Grid.Column="2"
+                                        CommandParameter="{Binding}"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding Path=BindingContext.OpenReadingPageCommand, Source={x:Reference MagazineListPage}}"
+                                        FontSize="Large"
+                                        FontAttributes="Bold"
+                                        TextColor="Maroon"
+                                        Text="&#x2794;" />
+                            </Grid>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Okuyucuyu Aç"
+                                          CommandParameter="{Binding}"
+                                          Command="{Binding Path=BindingContext.OpenReadingPageCommand,
+                          Source={x:Reference MagazineListPage}}"></MenuItem>
+                            </ViewCell.ContextActions>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

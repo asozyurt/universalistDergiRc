@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UniversalistDergiRC.Views.MenuView"
+             BackgroundImage="back1.jpg"
+             Opacity="50"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout >
+            <Image VerticalOptions="StartAndExpand"
+                   Margin="0,25,0,5"
+                   Source="Icon.png" />
+            <StackLayout VerticalOptions="CenterAndExpand"
+                         Margin="0,20,0,20">
+
+                <Button Text="UNIVERSALIST DERGİ"
+                        BorderRadius="5"
+                        BorderWidth="1"
+                        BorderColor="Maroon"
+                        Command="{Binding OpenOfficialSiteCommand}" />
+                <Button Text="DERGİ LİSTESİ"
+                        BorderRadius="5"
+                        BorderWidth="1"
+                        BorderColor="Maroon"
+                        Command="{Binding OpenMagazineListCommand}" />
+                <Button Text="İŞARETLEDİKLERİM"
+                        BorderRadius="5"
+                        BorderWidth="1"
+                        BorderColor="Maroon"
+                        Command="{Binding OpenBookmarkListCommand}" />
+
+            </StackLayout>
+            <StackLayout VerticalOptions="End"
+                         BackgroundColor="Transparent">
+                <Label Text="&lt; Geliştirici />"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       FontAttributes="Italic" />
+                <Button BackgroundColor="Transparent"
+                        Image="asozyurt.png"
+                        Command="{Binding OpenDevelopersSiteCommand}" />
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="BookmarkListPage"
+             BackgroundImage="back1.jpg"
+             x:Class="UniversalistDergiRC.Views.BookmarkListView">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+             
+                     HorizontalOptions="FillAndExpand">
+
+            <Label Text="İşaretlediklerim"
+                   HorizontalOptions="Center"
+                   FontAttributes="Italic"
+                   FontSize="Medium"></Label>
+            <ListView HasUnevenRows="True"
+                      x:Name="lstBookmarks"
+                      SeparatorColor="Purple"
+                      ItemsSource="{Binding BookmarkList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="7*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0"
+                                       BackgroundColor="Transparent"
+                                       Source="savedBookmarkMini.png"
+                                       Margin="5,1,1,1" />
+                                <StackLayout Grid.Column="1"
+                                             Margin="5,0,0,0"
+                                             VerticalOptions="Center"
+                                             HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding Description}"
+                                           FontSize="Medium"
+                                           FontAttributes="Bold"
+                                           TextColor="Gray"></Label>
+                                </StackLayout>
+                                <Button Grid.Column="2"
+                                        CommandParameter="{Binding}"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding Path=BindingContext.OpenBookmarkedPageCommand, Source={x:Reference BookmarkListPage}}"
+                                        FontSize="Large"
+                                        FontAttributes="Bold"
+                                        TextColor="Yellow"
+                                        Text="&#x2794;" />
+                            </Grid>
+                            <!--<Label Text="{Binding Description}"
+                                   FontSize="Medium"
+                                   FontAttributes="Bold"
+                                   TextColor="Orange"></Label>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Sayfaya Git"
+                                          CommandParameter="{Binding}"
+                                          Command="{Binding Path=BindingContext.OpenBookmarkedPageCommand,
+                          Source={x:Reference BookmarkListPage}}"></MenuItem>
+                            </ViewCell.ContextActions>-->
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

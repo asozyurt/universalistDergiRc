@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:bhv="clr-namespace:UniversalistDergiRC.Core"
+             x:Class="UniversalistDergiRC.Views.ReadingPageView">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ContentView VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand">
+            <Image x:Name="imgActivePage"
+                   Aspect="Fill"
+                   Source="{Binding ActivePageUrl}">
+                <Image.Behaviors>
+                    <bhv:ZoomImageBehavior IsScaleEnabled="True"
+                                           IsTranslateEnabled="True" />
+                </Image.Behaviors>
+            </Image>
+        </ContentView>
+
+        <ActivityIndicator Grid.Row="0"
+                           VerticalOptions="FillAndExpand"
+                           HorizontalOptions="Center"
+                           BindingContext="{x:Reference Name=imgActivePage}"
+                           IsVisible="{Binding Path=IsLoading}"
+                           IsRunning="{Binding Path=IsLoading}" />
+
+        <Grid x:Name="grdNavigation"
+              VerticalOptions="End"
+              HorizontalOptions="CenterAndExpand"
+              Grid.Row="1"
+              BackgroundColor="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnGoFirstPage"
+                    BackgroundColor="White"
+                    BorderWidth="1"
+                    Margin="5,0,0,0"
+                    Image="firstPage.png"
+                    BorderColor="Gray"
+                    Command="{Binding GoFirstPageCommand}"
+                    Grid.Column="0" />
+            <Button x:Name="btnAddBookmark"
+                    BackgroundColor="White"
+                    BorderWidth="1"
+                    Image="{Binding BookmarkIcon}"
+                    BorderColor="Gray"
+                    Command="{Binding AddOrRemoveBookmarkCommand}"
+                    Grid.Column="1" />
+            <Label x:Name="lblPageNumber"
+                   Grid.Column="2"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   FontSize="Medium"
+                   FontAttributes="Bold"
+                   Text="{Binding ActivePageNumber}"
+                   Margin="1"
+                   HorizontalOptions="Center"
+                   TextColor="Gray" />
+            <Button x:Name="btnPreviousPage"
+                    BackgroundColor="White"
+                    Grid.Column="3"
+                    Image="previousPage.png"
+                    Command="{Binding GoPreviousPageCommand}"
+                    BorderWidth="1"
+                    BorderColor="Gray" />
+            <Button x:Name="btnNextPage"
+                    Grid.Column="4"
+                    Image="nextPage.png"
+                    Margin="0,0,5,0"
+                    Command="{Binding GoNextPageCommand}"
+                    BackgroundColor="White"
+                    BorderWidth="1"
+                    BorderColor="Gray">
+            </Button>
+        </Grid>
+    </Grid>
+</ContentPage>

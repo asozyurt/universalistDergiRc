@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>eb884dcf-4a2d-4472-ba1d-d25d5fd1ca88</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>UniversalistDergiRC</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\ZoomImageBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataAccess\ClientDataManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataAccess\DataAccessManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataAccess\ISaveAndLoad.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\BaseModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\BookmarkModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\MagazineDetailModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\MagazinePageModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\MagazineSummaryModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NavigationController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repositories\Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BookmarkListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ReadingPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MenuViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MagazineListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\BookmarkListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MagazineListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MenuView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ReadingPageView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MenuView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MagazineListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\ReadingPageView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\BookmarkListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)unv_sayilar.xml" />
+  </ItemGroup>
+</Project>
