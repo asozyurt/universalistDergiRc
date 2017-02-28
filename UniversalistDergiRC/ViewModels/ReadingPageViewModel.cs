@@ -23,9 +23,11 @@ namespace UniversalistDergiRC.ViewModels
         private ICommand _goPreviousPageCommand;
         private bool _isBookmarked;
         private MagazineDetailModel activeMagazine;
+        private NavigationController navigationController;
 
-        public ReadingPageViewModel()
+        public ReadingPageViewModel(NavigationController navigationController)
         {
+            this.navigationController = navigationController;
         }
 
         public int ActivePageIndex
@@ -191,7 +193,14 @@ namespace UniversalistDergiRC.ViewModels
 
         private void goPreviousPage(object obj)
         {
-            openPage(ActivePageIndex - 1);
+            if (ActivePageIndex == 0)
+            {
+                navigationController.OpenMagazineListPage();
+            }
+            else
+            {
+                openPage(ActivePageIndex - 1);
+            }
         }
 
         private void openPage(int pageIndex)

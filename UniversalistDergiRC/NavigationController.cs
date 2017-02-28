@@ -28,7 +28,7 @@ namespace UniversalistDergiRC
                 return;
 
             if (detailCarouselPage.Children.Count == 1)
-                detailCarouselPage.Children.Add(new ReadingPageView());
+                detailCarouselPage.Children.Add(new ReadingPageView(this));
 
             ReadingPageView readingPage = detailCarouselPage.Children[1] as ReadingPageView;
 

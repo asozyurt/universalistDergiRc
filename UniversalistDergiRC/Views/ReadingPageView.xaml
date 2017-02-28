@@ -31,7 +31,7 @@
               VerticalOptions="End"
               HorizontalOptions="CenterAndExpand"
               Grid.Row="1"
-              BackgroundColor="White">
+              BackgroundColor="#FFC0C0C0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -40,7 +40,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Button x:Name="btnGoFirstPage"
-                    BackgroundColor="White"
+                    BackgroundColor="#FFC0C0C0"
                     BorderWidth="1"
                     Margin="5,0,0,0"
                     Image="firstPage.png"
@@ -48,7 +48,7 @@
                     Command="{Binding GoFirstPageCommand}"
                     Grid.Column="0" />
             <Button x:Name="btnAddBookmark"
-                    BackgroundColor="White"
+                    BackgroundColor="#FFC0C0C0"
                     BorderWidth="1"
                     Image="{Binding BookmarkIcon}"
                     BorderColor="Gray"
@@ -62,10 +62,11 @@
                    FontAttributes="Bold"
                    Text="{Binding ActivePageNumber}"
                    Margin="1"
+                   BackgroundColor="#FFC0C0C0"
                    HorizontalOptions="Center"
-                   TextColor="Gray" />
+                   TextColor="Black" />
             <Button x:Name="btnPreviousPage"
-                    BackgroundColor="White"
+                    BackgroundColor="#FFC0C0C0"
                     Grid.Column="3"
                     Image="previousPage.png"
                     Command="{Binding GoPreviousPageCommand}"
@@ -76,7 +77,7 @@
                     Image="nextPage.png"
                     Margin="0,0,5,0"
                     Command="{Binding GoNextPageCommand}"
-                    BackgroundColor="White"
+                    BackgroundColor="#FFC0C0C0"
                     BorderWidth="1"
                     BorderColor="Gray">
             </Button>

@@ -27,7 +27,7 @@ namespace UniversalistDergiRC.Repositories
         public static readonly string BOOKMARK_NORMAL_ICON = "bookmark.png";
         public static readonly string BOOKMARK_SAVED_ICON = "savedBookmark.png";
 
-        public static readonly TimeSpan DEFAULT_CACHE_VALIDITY = new TimeSpan(0, 0, 0, 0);
+        public static readonly TimeSpan DEFAULT_CACHE_VALIDITY = new TimeSpan(0, 0, 5, 0);
 
         public static readonly string EMPTY_PAGE = "https://image.freepik.com/free-photo/empty-landscape_1127-111.jpg";
 

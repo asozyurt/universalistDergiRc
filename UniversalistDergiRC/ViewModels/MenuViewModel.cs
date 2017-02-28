@@ -110,7 +110,6 @@ namespace UniversalistDergiRC.ViewModels
             {
                 _title = value;
                 OnPropertyChanged(() => Title);
-
             }
         }
 
@@ -120,7 +119,7 @@ namespace UniversalistDergiRC.ViewModels
         }
         private void openOfficialSite(object obj)
         {
-            Device.OpenUri(new Uri("http://universalist.org"));
+            Device.OpenUri(new Uri("http://universalistdergi.org"));
         }
     }
 }

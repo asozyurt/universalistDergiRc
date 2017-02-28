@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6DE97C39-8ADD-417A-8A8A-343C980D23D2}</ProjectGuid>
+    <ProjectGuid>{AF6FEA8E-E7CC-48EB-9A44-F37A4D1AEF7F}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
     <RootNamespace>UniversalistDergiRC.iOS</RootNamespace>

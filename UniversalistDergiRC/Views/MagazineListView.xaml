@@ -3,14 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:UniversalistDergiRC.ViewModels;assembly=UniversalistDergiRC"
              x:Name="MagazineListPage"
-             BackgroundImage="back2.jpg"
+             BackgroundImage="listBackground.png"
              x:Class="UniversalistDergiRC.Views.MagazineListView">
     <ContentPage.Content>
         <StackLayout Orientation="Vertical"
+                     Margin="0,20,0,0"
                      HorizontalOptions="FillAndExpand">
           
             <Label Text="Universalist Sayılar"
                    HorizontalOptions="Center"
+                   Margin="0,5,0,5"
                    FontAttributes="Italic"
                    FontSize="Medium"></Label>
             <ListView HasUnevenRows="True"
@@ -52,10 +54,7 @@
                                         CommandParameter="{Binding}"
                                         BackgroundColor="Transparent"
                                         Command="{Binding Path=BindingContext.OpenReadingPageCommand, Source={x:Reference MagazineListPage}}"
-                                        FontSize="Large"
-                                        FontAttributes="Bold"
-                                        TextColor="Maroon"
-                                        Text="&#x2794;" />
+                                        Image="rightRed.png" />
                             </Grid>
                             <ViewCell.ContextActions>
                                 <MenuItem Text="Okuyucuyu Aç"

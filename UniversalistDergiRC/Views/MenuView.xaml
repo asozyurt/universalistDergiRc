@@ -2,40 +2,50 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UniversalistDergiRC.Views.MenuView"
-             BackgroundImage="back1.jpg"
-             Opacity="50"
+             BackgroundColor="#FFC0C0C0"
              Title="{Binding Title}">
     <ContentPage.Content>
-        <StackLayout >
+        <StackLayout>
             <Image VerticalOptions="StartAndExpand"
                    Margin="0,25,0,5"
                    Source="Icon.png" />
+            <Label VerticalOptions="StartAndExpand"
+                   Margin="0,5,0,5"
+                   FontSize="Medium"
+                   TextColor="Black"
+                   HorizontalOptions="CenterAndExpand"
+                   HorizontalTextAlignment="Center"
+                   Text="UNIVERSALIST DERGI (Beta App)" />
             <StackLayout VerticalOptions="CenterAndExpand"
-                         Margin="0,20,0,20">
-
-                <Button Text="UNIVERSALIST DERGİ"
-                        BorderRadius="5"
-                        BorderWidth="1"
-                        BorderColor="Maroon"
-                        Command="{Binding OpenOfficialSiteCommand}" />
+                         Margin="0,10,0,20">
                 <Button Text="DERGİ LİSTESİ"
-                        BorderRadius="5"
+                        BackgroundColor="Transparent"
+                        BorderColor="Purple"
                         BorderWidth="1"
-                        BorderColor="Maroon"
+                        TextColor="#FF696969"
                         Command="{Binding OpenMagazineListCommand}" />
-                <Button Text="İŞARETLEDİKLERİM"
-                        BorderRadius="5"
+                <Button Text="UNIVERSALIST DERGİ"
+                        BackgroundColor="Transparent"
+                        BorderColor="Purple"
                         BorderWidth="1"
-                        BorderColor="Maroon"
+                        TextColor="#FF696969"
+                        Command="{Binding OpenOfficialSiteCommand}" />
+
+                <Button Text="İŞARETLEDİKLERİM"
+                        BackgroundColor="Transparent"
+                        BorderColor="Purple"
+                        BorderWidth="1"
+                        TextColor="#FF696969"
                         Command="{Binding OpenBookmarkListCommand}" />
 
             </StackLayout>
             <StackLayout VerticalOptions="End"
                          BackgroundColor="Transparent">
-                <Label Text="&lt; Geliştirici />"
+                <Label Text="Geliştirici"
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"
-                       FontAttributes="Italic" />
+                       FontAttributes="Italic"
+                       TextColor="Black" />
                 <Button BackgroundColor="Transparent"
                         Image="asozyurt.png"
                         Command="{Binding OpenDevelopersSiteCommand}" />

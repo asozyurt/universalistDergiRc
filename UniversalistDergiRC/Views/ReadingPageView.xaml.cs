@@ -6,10 +6,10 @@ namespace UniversalistDergiRC.Views
 {
     public partial class ReadingPageView : ContentPage
     {
-        public ReadingPageView()
+        public ReadingPageView(NavigationController navigationController)
         {
             InitializeComponent();
-            BindingContext = new ReadingPageViewModel();
+            BindingContext = new ReadingPageViewModel(navigationController);
         }
     }
 }
