@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UniversalistDergiRC.Views.MenuView"
-             BackgroundColor="#FFC0C0C0"
+             BackgroundColor="#2D465F"
              Title="{Binding Title}">
     <ContentPage.Content>
         <StackLayout>
@@ -17,25 +17,23 @@
                    HorizontalTextAlignment="Center"
                    Text="UNIVERSALIST DERGI (Beta App)" />
             <StackLayout VerticalOptions="CenterAndExpand"
-                         Margin="0,10,0,20">
+                         Margin="0,5,0,20">
+                
                 <Button Text="DERGİ LİSTESİ"
                         BackgroundColor="Transparent"
-                        BorderColor="Purple"
-                        BorderWidth="1"
-                        TextColor="#FF696969"
+                        TextColor="White"
+                        FontAttributes="Bold"
                         Command="{Binding OpenMagazineListCommand}" />
                 <Button Text="UNIVERSALIST DERGİ"
                         BackgroundColor="Transparent"
-                        BorderColor="Purple"
-                        BorderWidth="1"
-                        TextColor="#FF696969"
+                        TextColor="White"
+                        FontAttributes="Bold"
                         Command="{Binding OpenOfficialSiteCommand}" />
 
                 <Button Text="İŞARETLEDİKLERİM"
                         BackgroundColor="Transparent"
-                        BorderColor="Purple"
-                        BorderWidth="1"
-                        TextColor="#FF696969"
+                        TextColor="White"
+                        FontAttributes="Bold"
                         Command="{Binding OpenBookmarkListCommand}" />
 
             </StackLayout>
@@ -45,7 +43,7 @@
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"
                        FontAttributes="Italic"
-                       TextColor="Black" />
+                       TextColor="White" />
                 <Button BackgroundColor="Transparent"
                         Image="asozyurt.png"
                         Command="{Binding OpenDevelopersSiteCommand}" />

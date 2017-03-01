@@ -30,6 +30,7 @@ namespace UniversalistDergiRC.DataAccess
                             SourceURL = b.Element("CoverPage").Value
                         },
                         Title = b.Element("Title").Value,
+                        SpotDescription = b.Element("SpotDescription").Value,
                         Period = b.Element("Period").Value,
                         Issue = int.Parse(b.Element("Issue").Value),
                         PageCount = int.Parse(b.Element("TotalPageCount").Value)

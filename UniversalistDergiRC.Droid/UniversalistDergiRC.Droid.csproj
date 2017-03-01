@@ -137,12 +137,6 @@
     <AndroidResource Include="Resources\Drawable\previousPage.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\rightRed.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\rightYellow.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\Drawable\listBackground.png" />
   </ItemGroup>
   <Import Project="..\UniversalistDergiRC\UniversalistDergiRC.projitems" Label="Shared" Condition="Exists('..\UniversalistDergiRC\UniversalistDergiRC.projitems')" />

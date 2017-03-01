@@ -146,7 +146,7 @@ namespace UniversalistDergiRC.DataAccess
 
         private static string serializeMagazineSummary(MagazineSummaryModel magazineSummary)
         {
-            return string.Format(Constants.GENERIC_ISSUE_FORMAT, magazineSummary.CoverPage.SourceURL, magazineSummary.Issue, magazineSummary.PageCount, magazineSummary.Period, magazineSummary.Title);
+            return string.Format(Constants.GENERIC_ISSUE_FORMAT, magazineSummary.CoverPage.SourceURL, magazineSummary.Issue, magazineSummary.PageCount, magazineSummary.Period, magazineSummary.Title,magazineSummary.SpotDescription);
         }
     }
 }

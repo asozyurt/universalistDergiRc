@@ -9,12 +9,19 @@
         <StackLayout Orientation="Vertical"
                      Margin="0,20,0,0"
                      HorizontalOptions="FillAndExpand">
-          
-            <Label Text="Universalist Sayılar"
+
+            <Label Text="UNIVERSALIST SAYILAR"
                    HorizontalOptions="Center"
-                   Margin="0,5,0,5"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   FontSize="Medium"
+                   Margin="0,5,0,5"></Label>
+            <Label Text="İlgili sayıyı okumak için listeden seçim yapabilirsiniz"
+                   Margin="1,3,1,3"
+                   HorizontalOptions="Center"
+                   TextColor="Silver"
                    FontAttributes="Italic"
-                   FontSize="Medium"></Label>
+                   FontSize="Small"></Label>
             <ListView HasUnevenRows="True"
                       x:Name="lstMagazines"
                       SeparatorColor="Red"
@@ -22,42 +29,38 @@
                       IsPullToRefreshEnabled="True"
                       RefreshCommand="{Binding Path=BindingContext.RefreshCommand,
                        Source={x:Reference MagazineListPage}}"
+                      SelectedItem="{Binding SelectedMagazine}"
                       IsRefreshing="{Binding IsRefreshing, Mode=OneWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
+                            <Grid Margin="5,7,5,7">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="3*" />
                                     <ColumnDefinition Width="7*" />
-                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0"
                                        BackgroundColor="Transparent"
                                        Source="{Binding CoverPage.SourceURL}"
-                                       Margin="5,1,1,1" />
+                                       Margin="5,1,1,5" />
                                 <StackLayout Grid.Column="1"
-                                             Margin="5,0,0,0"
+                                             Margin="5,1,1,5"
                                              VerticalOptions="Center"
                                              HorizontalOptions="StartAndExpand">
                                     <Label Text="{Binding Title}"
                                            FontSize="Medium"
                                            FontAttributes="Bold"
-                                           TextColor="Orange"></Label>
-                                    <Label Text="{Binding Period}"
                                            TextColor="White"></Label>
-                                    <Label Text="{Binding PageCount, StringFormat='Sayfa Sayısı {0}'}"
+                                    <Label Text="{Binding SpotDescription}"
+                                           TextColor="White"></Label>
+                                    <Label Text="{Binding Period}"
                                            FontSize="Micro"
-                                           TextColor="Yellow"></Label>
+                                           TextColor="Teal"></Label>
                                 </StackLayout>
-                                <Button Grid.Column="2"
-                                        CommandParameter="{Binding}"
-                                        BackgroundColor="Transparent"
-                                        Command="{Binding Path=BindingContext.OpenReadingPageCommand, Source={x:Reference MagazineListPage}}"
-                                        Image="rightRed.png" />
+                               
                             </Grid>
                             <ViewCell.ContextActions>
-                                <MenuItem Text="Okuyucuyu Aç"
+                                <MenuItem Text="OKU"
                                           CommandParameter="{Binding}"
                                           Command="{Binding Path=BindingContext.OpenReadingPageCommand,
                           Source={x:Reference MagazineListPage}}"></MenuItem>

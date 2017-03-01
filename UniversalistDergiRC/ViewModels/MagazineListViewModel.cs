@@ -52,7 +52,23 @@ namespace UniversalistDergiRC.ViewModels
                 }
             }
         }
-
+        private MagazineSummaryModel selectedMagazine;
+        public MagazineSummaryModel SelectedMagazine
+        {
+            get
+            {
+                return selectedMagazine;
+            }
+            set
+            {
+                if (selectedMagazine != value)
+                {
+                    selectedMagazine = value;
+                    openSelectedMagazine(selectedMagazine);
+                    OnPropertyChanged(() => SelectedMagazine);
+                }
+            }
+        }
         private void openSelectedMagazine(object obj)
         {
             MagazineSummaryModel selectedMagazine = obj as MagazineSummaryModel;

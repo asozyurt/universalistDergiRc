@@ -31,7 +31,7 @@
               VerticalOptions="End"
               HorizontalOptions="CenterAndExpand"
               Grid.Row="1"
-              BackgroundColor="#FFC0C0C0">
+              BackgroundColor="#2D465F">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -40,18 +40,14 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Button x:Name="btnGoFirstPage"
-                    BackgroundColor="#FFC0C0C0"
-                    BorderWidth="1"
+                    BackgroundColor="#2D465F"
                     Margin="5,0,0,0"
                     Image="firstPage.png"
-                    BorderColor="Gray"
                     Command="{Binding GoFirstPageCommand}"
                     Grid.Column="0" />
             <Button x:Name="btnAddBookmark"
-                    BackgroundColor="#FFC0C0C0"
-                    BorderWidth="1"
+                    BackgroundColor="#2D465F"
                     Image="{Binding BookmarkIcon}"
-                    BorderColor="Gray"
                     Command="{Binding AddOrRemoveBookmarkCommand}"
                     Grid.Column="1" />
             <Label x:Name="lblPageNumber"
@@ -62,24 +58,21 @@
                    FontAttributes="Bold"
                    Text="{Binding ActivePageNumber}"
                    Margin="1"
-                   BackgroundColor="#FFC0C0C0"
+                   BackgroundColor="#2D465F"
                    HorizontalOptions="Center"
+                   VerticalOptions="Center"
                    TextColor="Black" />
             <Button x:Name="btnPreviousPage"
-                    BackgroundColor="#FFC0C0C0"
+                    BackgroundColor="#2D465F"
                     Grid.Column="3"
                     Image="previousPage.png"
-                    Command="{Binding GoPreviousPageCommand}"
-                    BorderWidth="1"
-                    BorderColor="Gray" />
+                    Command="{Binding GoPreviousPageCommand}" />
             <Button x:Name="btnNextPage"
                     Grid.Column="4"
                     Image="nextPage.png"
                     Margin="0,0,5,0"
                     Command="{Binding GoNextPageCommand}"
-                    BackgroundColor="#FFC0C0C0"
-                    BorderWidth="1"
-                    BorderColor="Gray">
+                    BackgroundColor="#2D465F">
             </Button>
         </Grid>
     </Grid>

@@ -61,6 +61,23 @@ namespace UniversalistDergiRC.ViewModels
             }
         }
 
+        private BookmarkModel selectedBookmark;
+        public BookmarkModel SelectedBookmark {
+            get
+            {
+                return selectedBookmark;
+            }
+            set
+            {
+                if (selectedBookmark != value)
+                {
+                    selectedBookmark = value;
+                    openBookmarkedPage(selectedBookmark);
+                    OnPropertyChanged(() => SelectedBookmark);
+                }
+            }
+        }
+
         private void openBookmarkedPage(object obj)
         {
             BookmarkModel selectedBookmark = obj as BookmarkModel;

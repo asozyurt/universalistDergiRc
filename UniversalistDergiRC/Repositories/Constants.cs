@@ -12,10 +12,10 @@ namespace UniversalistDergiRC.Repositories
 
         public static readonly string UNIVERSALIST_DERGI_TITLE = "Universalist Dergi";
 
-        public static readonly char ITEM_SEPERATOR = '|';
-        public static readonly char ITEM_PROPERTY_SEPERATOR = '~';
-        public static readonly string GENERIC_BOOKMARK_FORMAT = "{0}~{1}";
-        public static readonly string GENERIC_ISSUE_FORMAT = "{0}~{1}~{2}~{3}~{4}";
+        public static readonly char ITEM_SEPERATOR                 = '|';
+        public static readonly char ITEM_PROPERTY_SEPERATOR        = '~';
+        public static readonly string GENERIC_BOOKMARK_FORMAT      = "{0}~{1}";
+        public static readonly string GENERIC_ISSUE_FORMAT         = "{0}~{1}~{2}~{3}~{4}~{5}";
         public static readonly string GENERIC_BOOKMARK_DESCRIPTION = "Sayı {0} - Sayfa {1}";
 
         public static readonly string BOOKMARKS_FILENAME = "Bookmarks.aso";

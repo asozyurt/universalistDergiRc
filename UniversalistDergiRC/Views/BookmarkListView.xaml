@@ -2,52 +2,49 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Name="BookmarkListPage"
-             BackgroundColor="#FFC0C0C0"
+             BackgroundColor="#648BAA"
              x:Class="UniversalistDergiRC.Views.BookmarkListView">
     <ContentPage.Content>
         <StackLayout Orientation="Vertical"
                      HorizontalOptions="FillAndExpand">
 
-            <Label Text="İşaretlediklerim"
+            <Label Text="İŞARETLEDİKLERİM"
                    Margin="1,25,1,5"
                    HorizontalOptions="Center"
-                   TextColor="Black"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   FontSize="Medium" />
+            <Label Text="İlgili sayfaya gitmek için listeden seçim yapabilirsiniz"
+                   Margin="1,25,1,5"
+                   HorizontalOptions="Center"
+                   TextColor="Silver"
                    FontAttributes="Italic"
-                   FontSize="Medium"></Label>
+                   FontSize="Small"></Label>
             <ListView HasUnevenRows="True"
                       x:Name="lstBookmarks"
                       Margin="1,5,1,5"
-                      SeparatorColor="Purple"
+                      SeparatorColor="#24364F"
+                      SelectedItem="{Binding SelectedBookmark}"
                       ItemsSource="{Binding BookmarkList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
+                            <Grid Margin="5,5,2,1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="7*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0"
+                                       Margin="5,15,2,5"
                                        BackgroundColor="Transparent"
-                                       Source="savedBookmarkMini.png"
-                                       Margin="5,1,1,1" />
-                                <StackLayout Grid.Column="1"
-                                             Margin="5,0,0,0"
-                                             VerticalOptions="Center"
-                                             HorizontalOptions="StartAndExpand">
-                                    <Label Text="{Binding Description}"
-                                           FontSize="Medium"
-                                           TextColor="Black"></Label>
-                                </StackLayout>
-                                <Button Grid.Column="2"
-                                        CommandParameter="{Binding}"
-                                        BackgroundColor="Transparent"
-                                        Command="{Binding Path=BindingContext.OpenBookmarkedPageCommand, Source={x:Reference BookmarkListPage}}"
-                                        Image="rightYellow.png"  />
+                                       Source="savedBookmarkMini.png" />
+                                <Label Text="{Binding Description}"
+                                       Grid.Column="1"
+                                       Margin="5,15,2,5"
+                                       FontSize="Medium"
+                                       TextColor="White"></Label>
                             </Grid>
-                         
+
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

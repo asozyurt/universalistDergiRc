@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using UniversalistDergiRC.Core;
 using UniversalistDergiRC.DataAccess;
@@ -159,11 +160,12 @@ namespace UniversalistDergiRC.ViewModels
 
             }
         }
-
+      
         // Default değeri özellikle sıfır yapmadım, bu metodun sayfa numarasıyla çalışmasını istiyorum.
         internal void OpenMagazine(int issueNumber, int pageNumber = 1)
         {
             activeMagazine = DataAccessManager.GetMagazineIssueDetail(issueNumber);
+
             openPage(pageNumber - 1);
         }
 

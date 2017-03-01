@@ -11,7 +11,22 @@ namespace UniversalistDergiRC.Model
         private MagazinePageModel _coverPage;
         private string _period;
         private int _pageCount;
-
+        private string _spotDescription;
+        public string SpotDescription
+        {
+            get
+            {
+                return _spotDescription;
+            }
+            set
+            {
+                if (_spotDescription != value)
+                {
+                    _spotDescription = value;
+                    OnPropertyChanged(() => SpotDescription);
+                }
+            }
+        }
         public string Title
         {
             get
@@ -99,7 +114,7 @@ namespace UniversalistDergiRC.Model
 
             string[] magazineSummaryArray = serializedMagazineSummaryText.Split(new[] { Constants.ITEM_PROPERTY_SEPERATOR }, StringSplitOptions.RemoveEmptyEntries);
 
-            if (magazineSummaryArray == null || magazineSummaryArray.Length < 5)
+            if (magazineSummaryArray == null || magazineSummaryArray.Length < 6)
                 return null;
 
             string coverPage = magazineSummaryArray[0];
@@ -107,6 +122,7 @@ namespace UniversalistDergiRC.Model
             string pageCount = magazineSummaryArray[2];
             string period = magazineSummaryArray[3];
             string title = magazineSummaryArray[4];
+            string spotDescription = magazineSummaryArray[5];
 
             MagazineSummaryModel result = new MagazineSummaryModel
             {
@@ -117,7 +133,8 @@ namespace UniversalistDergiRC.Model
                 Issue = int.Parse(issue),
                 PageCount = int.Parse(pageCount),
                 Period = period,
-                Title = title
+                Title = title,
+                SpotDescription = spotDescription
             };
 
             return result;
