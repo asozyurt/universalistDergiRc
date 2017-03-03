@@ -10,13 +10,32 @@ namespace UniversalistDergiRC.ViewModels
 {
     public class MagazineListViewModel : BaseModel
     {
+        private bool _isRefreshing;
+        private ObservableCollection<MagazineSummaryModel> _magazineIssueList;
+        private NavigationController _navigationController;
+        private ICommand _openReadingPageCommand;
+        private ICommand _refreshCommand;
+        private MagazineSummaryModel selectedMagazine;
+
         public MagazineListViewModel(NavigationController controller)
         {
             _navigationController = controller;
             refreshMagazineIssueList(true);
         }
 
-        private ObservableCollection<MagazineSummaryModel> _magazineIssueList;
+        public bool IsRefreshing
+        {
+            get
+            {
+                return _isRefreshing;
+            }
+
+            set
+            {
+                _isRefreshing = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<MagazineSummaryModel> MagazineIssueList
         {
@@ -35,7 +54,6 @@ namespace UniversalistDergiRC.ViewModels
             }
         }
 
-        private ICommand _openReadingPageCommand;
         public ICommand OpenReadingPageCommand
         {
             get
@@ -52,33 +70,7 @@ namespace UniversalistDergiRC.ViewModels
                 }
             }
         }
-        private MagazineSummaryModel selectedMagazine;
-        public MagazineSummaryModel SelectedMagazine
-        {
-            get
-            {
-                return selectedMagazine;
-            }
-            set
-            {
-                if (selectedMagazine != value)
-                {
-                    selectedMagazine = value;
-                    openSelectedMagazine(selectedMagazine);
-                    OnPropertyChanged(() => SelectedMagazine);
-                }
-            }
-        }
-        private void openSelectedMagazine(object obj)
-        {
-            MagazineSummaryModel selectedMagazine = obj as MagazineSummaryModel;
-            if (selectedMagazine == null)
-                return;
 
-            _navigationController.OpenReadingPage(selectedMagazine.Issue, Constants.FIRST_PAGE_NUMBER);
-        }
-
-        private ICommand _refreshCommand;
         public ICommand RefreshCommand
         {
             get
@@ -96,33 +88,44 @@ namespace UniversalistDergiRC.ViewModels
             }
         }
 
-
-
-        private bool _isRefreshing;
-        private NavigationController _navigationController;
-
-        public bool IsRefreshing
+        public MagazineSummaryModel SelectedMagazine
         {
             get
             {
-                return _isRefreshing;
+                return selectedMagazine;
             }
-
             set
             {
-                _isRefreshing = value;
-                OnPropertyChanged();
+                if (selectedMagazine != value)
+                {
+                    selectedMagazine = value;
+                    openSelectedMagazine(selectedMagazine);
+                    OnPropertyChanged(() => SelectedMagazine);
+                }
             }
         }
-        private void refreshMagazineIssueListCommand(object obj)
+
+        private void openSelectedMagazine(object obj)
         {
-            refreshMagazineIssueList(false);
+            MagazineSummaryModel selectedMagazine = obj as MagazineSummaryModel;
+            if (SelectedMagazine == null)
+                return;
+
+            _navigationController.OpenReadingPage(selectedMagazine.Issue, Constants.FIRST_PAGE_NUMBER);
+
+            SelectedMagazine = null;
         }
+
         private void refreshMagazineIssueList(bool tryLocal)
         {
             IsRefreshing = true;
             MagazineIssueList = DataAccessManager.GetMagazineIssues(tryLocal);
             IsRefreshing = false;
+        }
+
+        private void refreshMagazineIssueListCommand(object obj)
+        {
+            refreshMagazineIssueList(false);
         }
     }
 }

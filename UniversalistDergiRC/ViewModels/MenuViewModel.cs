@@ -8,19 +8,36 @@ namespace UniversalistDergiRC.ViewModels
 {
     public class MenuViewModel : BaseModel
     {
-        private ICommand _openDevelopersSiteCommand;
-        private ICommand _openOfficialSiteCommand;
-        private ICommand _openMagazineListCommand;
         private ICommand _openBookmarkListCommand;
+        private ICommand _openDevelopersSiteCommand;
+        private ICommand _openMagazineListCommand;
+        private ICommand _openOfficialSiteCommand;
         private string _title;
         private NavigationController navigationController;
-
 
         public MenuViewModel(NavigationController controller)
         {
             this.navigationController = controller;
             Title = Constants.UNIVERSALIST_DERGI_TITLE;
         }
+
+        public ICommand OpenBookmarkListCommand
+        {
+            get
+            {
+                _openBookmarkListCommand = _openBookmarkListCommand ?? new Command(openBookmarkList);
+                return _openBookmarkListCommand;
+            }
+            set
+            {
+                if (_openBookmarkListCommand != value)
+                {
+                    _openBookmarkListCommand = value;
+                    OnPropertyChanged(() => OpenBookmarkListCommand);
+                }
+            }
+        }
+
         public ICommand OpenDevelopersSiteCommand
         {
             get
@@ -34,23 +51,6 @@ namespace UniversalistDergiRC.ViewModels
                 {
                     _openDevelopersSiteCommand = value;
                     OnPropertyChanged(() => OpenDevelopersSiteCommand);
-                }
-            }
-        }
-
-        public ICommand OpenOfficialSiteCommand
-        {
-            get
-            {
-                _openOfficialSiteCommand = _openOfficialSiteCommand ?? new Command(openOfficialSite);
-                return _openOfficialSiteCommand;
-            }
-            set
-            {
-                if (_openOfficialSiteCommand != value)
-                {
-                    _openOfficialSiteCommand = value;
-                    OnPropertyChanged(() => OpenOfficialSiteCommand);
                 }
             }
         }
@@ -72,31 +72,21 @@ namespace UniversalistDergiRC.ViewModels
             }
         }
 
-        public ICommand OpenBookmarkListCommand
+        public ICommand OpenOfficialSiteCommand
         {
             get
             {
-                _openBookmarkListCommand = _openBookmarkListCommand ?? new Command(openBookmarkList);
-                return _openBookmarkListCommand;
+                _openOfficialSiteCommand = _openOfficialSiteCommand ?? new Command(openOfficialSite);
+                return _openOfficialSiteCommand;
             }
             set
             {
-                if (_openBookmarkListCommand != value)
+                if (_openOfficialSiteCommand != value)
                 {
-                    _openBookmarkListCommand = value;
-                    OnPropertyChanged(() => OpenBookmarkListCommand);
+                    _openOfficialSiteCommand = value;
+                    OnPropertyChanged(() => OpenOfficialSiteCommand);
                 }
             }
-        }
-
-        private void openBookmarkList(object obj)
-        {
-            navigationController.OpenBookmarkListPage();
-        }
-
-        private void openMagazineList(object obj)
-        {
-            navigationController.OpenMagazineListPage();
         }
 
         public string Title
@@ -113,10 +103,21 @@ namespace UniversalistDergiRC.ViewModels
             }
         }
 
+        private void openBookmarkList(object obj)
+        {
+            navigationController.OpenBookmarkListPage();
+        }
+
         private void openDevelopersSite(object obj)
         {
             Device.OpenUri(new Uri("http://asozyurt.com"));
         }
+
+        private void openMagazineList(object obj)
+        {
+            navigationController.OpenMagazineListPage();
+        }
+
         private void openOfficialSite(object obj)
         {
             Device.OpenUri(new Uri("http://universalistdergi.org"));

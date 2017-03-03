@@ -12,14 +12,15 @@ namespace UniversalistDergiRC.ViewModels
 {
     public class BookmarkListViewModel : BaseModel
     {
+        private ObservableCollection<BookmarkModel> _bookmarkList;
         private NavigationController _navigationController;
+        private ICommand _openBookmarkedPageCommand;
+        private BookmarkModel selectedBookmark;
 
         public BookmarkListViewModel(NavigationController controller)
         {
             this._navigationController = controller;
         }
-
-        private ObservableCollection<BookmarkModel> _bookmarkList;
 
         public ObservableCollection<BookmarkModel> BookmarkList
         {
@@ -37,13 +38,7 @@ namespace UniversalistDergiRC.ViewModels
                 }
             }
         }
-        internal void ListAllBookMarks()
-        {
-            var allBookmarks = ClientDataManager.GetAllBookmarks();
-            BookmarkList = new ObservableCollection<BookmarkModel>(allBookmarks);
-        }
 
-        private ICommand _openBookmarkedPageCommand;
         public ICommand OpenBookmarkedPageCommand
         {
             get
@@ -61,8 +56,8 @@ namespace UniversalistDergiRC.ViewModels
             }
         }
 
-        private BookmarkModel selectedBookmark;
-        public BookmarkModel SelectedBookmark {
+        public BookmarkModel SelectedBookmark
+        {
             get
             {
                 return selectedBookmark;
@@ -78,6 +73,12 @@ namespace UniversalistDergiRC.ViewModels
             }
         }
 
+        internal void ListAllBookMarks()
+        {
+            var allBookmarks = ClientDataManager.GetAllBookmarks();
+            BookmarkList = new ObservableCollection<BookmarkModel>(allBookmarks);
+        }
+
         private void openBookmarkedPage(object obj)
         {
             BookmarkModel selectedBookmark = obj as BookmarkModel;
@@ -86,7 +87,5 @@ namespace UniversalistDergiRC.ViewModels
 
             _navigationController.OpenReadingPage(selectedBookmark.IssueNumber,selectedBookmark.PageNumber);
         }
-
     }
-
 }

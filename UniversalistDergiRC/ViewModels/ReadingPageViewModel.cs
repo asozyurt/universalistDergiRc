@@ -208,11 +208,15 @@ namespace UniversalistDergiRC.ViewModels
         private void openPage(int pageIndex)
         {
             if (pageIndex < 0 || activeMagazine == null || pageIndex >= activeMagazine.Pages.Count)
+            {
+                navigationController.SetCurrentPageForResume(0, 0);
                 return;
-
+            }
             ActivePageIndex = pageIndex;
             IsBookmarked = activeMagazine.Pages[pageIndex].IsBookMarked;
             ActivePageUrl.Uri = new Uri(activeMagazine.Pages[pageIndex].SourceURL);
+
+            navigationController.SetCurrentPageForResume(activeMagazine.Issue, ActivePageNumber);
         }
     }
 

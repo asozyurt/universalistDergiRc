@@ -8,14 +8,19 @@ namespace UniversalistDergiRC
 {
     public class NavigationController
     {
+        private int currentIssue;
+        private int currentPage;
+
         private CarouselPage detailCarouselPage;
         private CarouselPage menuCarouselPage;
         private MasterDetailPage mainPage;
+
         public NavigationController()
         {
 
         }
-        public void SetPages(MasterDetailPage mainMasterDetail, CarouselPage detailCarousel, CarouselPage menuCarousel)
+
+        public void InitializeController(MasterDetailPage mainMasterDetail, CarouselPage detailCarousel, CarouselPage menuCarousel)
         {
             menuCarouselPage = menuCarousel;
             detailCarouselPage = detailCarousel;
@@ -80,6 +85,23 @@ namespace UniversalistDergiRC
                 return;
             mainPage.IsPresented = false;
             detailCarouselPage.CurrentPage = detailCarouselPage.Children[0];
+        }
+
+        internal void SetCurrentPageForResume(int issue, int activePageNumber)
+        {
+            currentIssue = issue;
+            currentPage = activePageNumber;
+        }
+
+        internal async void ResumeAsync()
+        {
+            if (currentIssue > 0 && currentPage > 0)
+            {
+                var resumeSelected = await mainPage.DisplayAlert("UNIVERSALIST DERGI", "Kaldığınız yerden devam etmek ister misiniz?", "Evet", "Hayır");
+
+                if(resumeSelected)
+                    OpenReadingPage(currentIssue, currentPage);
+            }
         }
     }
 }

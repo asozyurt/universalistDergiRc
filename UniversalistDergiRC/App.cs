@@ -12,24 +12,22 @@ namespace UniversalistDergiRC
 {
     public class App : Application
     {
-        NavigationController nvgController;
+        NavigationController navigationController;
         public App()
         {
-            nvgController = new NavigationController();
+            navigationController = new NavigationController();
         }
 
         protected override void OnStart()
         {
-            
-
             // Handle when your app starts
             CarouselPage detailCarousel = new CarouselPage();
             CarouselPage menuCarousel = new CarouselPage();
 
-            MagazineListView magazineListView = new MagazineListView(nvgController);
+            MagazineListView magazineListView = new MagazineListView(navigationController);
             detailCarousel.Children.Add(magazineListView);
 
-            MenuView menuView = new MenuView(nvgController);
+            MenuView menuView = new MenuView(navigationController);
             menuCarousel.Title = Constants.UNIVERSALIST_DERGI_TITLE;
             menuCarousel.Children.Add(menuView);
 
@@ -41,26 +39,31 @@ namespace UniversalistDergiRC
             masterDetail.Title = Constants.UNIVERSALIST_DERGI_TITLE;
             masterDetail.MasterBehavior = MasterBehavior.SplitOnPortrait;
             masterDetail.IsPresentedChanged += IsPresentedChanged;
-            nvgController.SetPages(masterDetail,detailCarousel, menuCarousel);
+            navigationController.InitializeController(masterDetail,detailCarousel, menuCarousel);
             MainPage = masterDetail;
+        }
 
+        internal void DroidOnBackPressed()
+        {
+            navigationController.OpenMagazineListPage();
         }
 
         private void IsPresentedChanged(object sender, EventArgs e)
         {
-            nvgController.CloseBookmarkListPage();
+            navigationController.CloseBookmarkListPage();
         }
 
        
 
         protected override void OnSleep()
         {
-            // Handle when your app sleeps
+            
         }
 
         protected override void OnResume()
         {
-            // Handle when your app resumes
+            navigationController.ResumeAsync();
         }
+        
     }
 }
