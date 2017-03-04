@@ -5,7 +5,7 @@ using Android.OS;
 
 namespace UniversalistDergiRC.Droid
 {
-    [Activity(Label = "Universalist Dergi", Icon = "@drawable/icon", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Universalist Dergi", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {

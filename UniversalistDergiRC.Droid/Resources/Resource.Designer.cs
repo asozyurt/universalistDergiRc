@@ -2215,8 +2215,8 @@ namespace UniversalistDergiRC.Droid
 			// aapt resource value: 0x7f0200a5
 			public const int nextPage = 2130837669;
 			
-			// aapt resource value: 0x7f0200aa
-			public const int notification_template_icon_bg = 2130837674;
+			// aapt resource value: 0x7f0200a9
+			public const int notification_template_icon_bg = 2130837673;
 			
 			// aapt resource value: 0x7f0200a6
 			public const int previousPage = 2130837670;
@@ -2226,9 +2226,6 @@ namespace UniversalistDergiRC.Droid
 			
 			// aapt resource value: 0x7f0200a8
 			public const int savedBookmarkMini = 2130837672;
-			
-			// aapt resource value: 0x7f0200a9
-			public const int splash = 2130837673;
 			
 			static Drawable()
 			{
@@ -3876,9 +3873,6 @@ namespace UniversalistDergiRC.Droid
 			
 			// aapt resource value: 0x7f0a0003
 			public const int Theme_MediaRouter_LightControlPanel = 2131361795;
-			
-			// aapt resource value: 0x7f0a0172
-			public const int Theme_Splash = 2131362162;
 			
 			// aapt resource value: 0x7f0a010e
 			public const int ThemeOverlay_AppCompat = 2131362062;

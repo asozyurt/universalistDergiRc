@@ -3,108 +3,72 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:UniversalistDergiRC.ViewModels;assembly=UniversalistDergiRC"
              x:Name="MagazineListPage"
-             xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
              BackgroundImage="listBackground.png"
              x:Class="UniversalistDergiRC.Views.MagazineListView">
     <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     Margin="0,20,0,0"
+                     HorizontalOptions="FillAndExpand">
 
-        <StackLayout>
             <Label Text="UNIVERSALIST SAYILAR"
                    HorizontalOptions="Center"
                    TextColor="White"
                    FontAttributes="Bold"
                    FontSize="Medium"
-                   Margin="0,20,0,0" />
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*" />
-                    <RowDefinition Height="7*" />
-                </Grid.RowDefinitions>
-                <cv:CarouselView ItemsSource="{Binding MagazineIssueList}"
-                                 x:Name="IssuesCarousel">
-                    <cv:CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image Grid.RowSpan="2"
-                                       Aspect="AspectFit"
-                                       Source="{Binding CoverPage.SourceURL}" />
-                                <StackLayout Grid.Row="1"
-                                             BackgroundColor="#80000000"
-                                             Padding="7">
-                                    <Label TextColor="White"
-                                           Text="{Binding SpotDescription}"
-                                           FontSize="14"
-                                           HorizontalOptions="Center"
-                                           VerticalOptions="CenterAndExpand" />
-                                </StackLayout>
-                            </Grid>
-                        </DataTemplate>
-                    </cv:CarouselView.ItemTemplate>
-                </cv:CarouselView>
-                <StackLayout Orientation="Vertical"
-                             Grid.Row="1"
-                             HorizontalOptions="FillAndExpand">
-
-                    <Label Text="İlgili sayıyı okumak için listeden seçim yapabilirsiniz"
-                           Margin="1,3,1,3"
-                           HorizontalOptions="Center"
-                           TextColor="White"
-                           FontAttributes="Italic"
-                           FontSize="Small"></Label>
-                    <ListView HasUnevenRows="True"
-                              x:Name="lstMagazines"
-                              SeparatorColor="Red"
-                              ItemsSource="{Binding MagazineIssueList}"
-                              IsPullToRefreshEnabled="True"
-                              RefreshCommand="{Binding Path=BindingContext.RefreshCommand,
+                   Margin="0,5,0,5"></Label>
+            <Label Text="İlgili sayıyı okumak için listeden seçim yapabilirsiniz"
+                   Margin="1,3,1,3"
+                   HorizontalOptions="Center"
+                   TextColor="Silver"
+                   FontAttributes="Italic"
+                   FontSize="Small"></Label>
+            <ListView HasUnevenRows="True"
+                      x:Name="lstMagazines"
+                      SeparatorColor="Red"
+                      ItemsSource="{Binding MagazineIssueList}"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding Path=BindingContext.RefreshCommand,
                        Source={x:Reference MagazineListPage}}"
-                              SelectedItem="{Binding SelectedMagazine,Mode=TwoWay,UpdateSourceEventName=PropertyChanged}"
-                              IsRefreshing="{Binding IsRefreshing, Mode=OneWay}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid Margin="5,7,5,7">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="3*" />
-                                            <ColumnDefinition Width="7*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Image Grid.Column="0"
-                                               BackgroundColor="Transparent"
-                                               Source="{Binding CoverPage.SourceURL}"
-                                               Margin="5,1,1,5" />
-                                        <StackLayout Grid.Column="1"
-                                                     Margin="5,1,1,5"
-                                                     VerticalOptions="Center"
-                                                     HorizontalOptions="StartAndExpand">
-                                            <Label Text="{Binding Title}"
-                                                   FontSize="Medium"
-                                                   FontAttributes="Bold"
-                                                   TextColor="White"></Label>
-                                            <Label Text="{Binding SpotDescription}"
-                                                   TextColor="White"></Label>
-                                            <Label Text="{Binding Period}"
-                                                   FontSize="Micro"
-                                                   TextColor="Navy"></Label>
-                                        </StackLayout>
-
-                                    </Grid>
-                                    <ViewCell.ContextActions>
-                                        <MenuItem Text="OKU"
-                                                  CommandParameter="{Binding}"
-                                                  Command="{Binding Path=BindingContext.OpenReadingPageCommand,
+                      SelectedItem="{Binding SelectedMagazine,Mode=TwoWay,UpdateSourceEventName=PropertyChanged}"
+                      IsRefreshing="{Binding IsRefreshing, Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="5,7,5,7">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="7*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0"
+                                       BackgroundColor="Transparent"
+                                       Source="{Binding CoverPage.SourceURL}"
+                                       Margin="5,1,1,5" />
+                                <StackLayout Grid.Column="1"
+                                             Margin="5,1,1,5"
+                                             VerticalOptions="Center"
+                                             HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding Title}"
+                                           FontSize="Medium"
+                                           FontAttributes="Bold"
+                                           TextColor="White"></Label>
+                                    <Label Text="{Binding SpotDescription}"
+                                           TextColor="White"></Label>
+                                    <Label Text="{Binding Period}"
+                                           FontSize="Micro"
+                                           TextColor="Teal"></Label>
+                                </StackLayout>
+                               
+                            </Grid>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="OKU"
+                                          CommandParameter="{Binding}"
+                                          Command="{Binding Path=BindingContext.OpenReadingPageCommand,
                           Source={x:Reference MagazineListPage}}"></MenuItem>
-                                    </ViewCell.ContextActions>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackLayout>
-            </Grid>
-
+                            </ViewCell.ContextActions>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
