@@ -98,6 +98,8 @@ namespace UniversalistDergiRC
 
                 if (resumeSelected)
                     OpenReadingPage(savedState.IssueNumber, savedState.PageNumber);
+                else
+                    OpenMagazineListPage();
             }
         }
 
