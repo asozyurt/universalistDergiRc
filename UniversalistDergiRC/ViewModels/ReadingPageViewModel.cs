@@ -23,7 +23,16 @@ namespace UniversalistDergiRC.ViewModels
         private ICommand _goNextPageCommand;
         private ICommand _goPreviousPageCommand;
         private bool _isBookmarked;
-        private MagazineDetailModel activeMagazine;
+        private MagazineDetailModel _activeMagazine;
+        public MagazineDetailModel ActiveMagazine
+        {
+            get { return _activeMagazine; }
+            set
+            {
+                _activeMagazine = value;
+                OnPropertyChanged(() => ActiveMagazine);
+            }
+        }
         private NavigationController navigationController;
 
         public ReadingPageViewModel(NavigationController navigationController)
@@ -160,11 +169,11 @@ namespace UniversalistDergiRC.ViewModels
 
             }
         }
-      
+
         // Default değeri özellikle sıfır yapmadım, bu metodun sayfa numarasıyla çalışmasını istiyorum.
         internal void OpenMagazine(int issueNumber, int pageNumber = 1)
         {
-            activeMagazine = DataAccessManager.GetMagazineIssueDetail(issueNumber);
+            ActiveMagazine = DataAccessManager.GetMagazineIssueDetail(issueNumber);
 
             openPage(pageNumber - 1);
         }
@@ -174,17 +183,17 @@ namespace UniversalistDergiRC.ViewModels
             bool processSuccessful = false;
             if (IsBookmarked)
             {
-                processSuccessful = ClientDataManager.DeleteSingleBookMark(activeMagazine.Issue, ActivePageNumber);
+                processSuccessful = ClientDataManager.DeleteSingleBookMark(ActiveMagazine.Issue, ActivePageNumber);
             }
             else
             {
-                processSuccessful = ClientDataManager.SaveSingleBookMark(activeMagazine.Issue, ActivePageNumber);
+                processSuccessful = ClientDataManager.SaveSingleBookMark(ActiveMagazine.Issue, ActivePageNumber);
             }
 
             if (processSuccessful)
             {
                 IsBookmarked = !IsBookmarked;
-                activeMagazine.Pages[ActivePageIndex].IsBookMarked = IsBookmarked;
+                ActiveMagazine.Pages[ActivePageIndex].IsBookMarked = IsBookmarked;
             }
         }
 
@@ -207,16 +216,16 @@ namespace UniversalistDergiRC.ViewModels
 
         private void openPage(int pageIndex)
         {
-            if (pageIndex < 0 || activeMagazine == null || pageIndex >= activeMagazine.Pages.Count)
+            if (pageIndex < 0 || ActiveMagazine == null || pageIndex >= ActiveMagazine.Pages.Count)
             {
                 navigationController.SetCurrentPageForResume(0, 0);
                 return;
             }
             ActivePageIndex = pageIndex;
-            IsBookmarked = activeMagazine.Pages[pageIndex].IsBookMarked;
-            ActivePageUrl.Uri = new Uri(activeMagazine.Pages[pageIndex].SourceURL);
+            IsBookmarked = ActiveMagazine.Pages[pageIndex].IsBookMarked;
+            ActivePageUrl.Uri = new Uri(ActiveMagazine.Pages[pageIndex].SourceURL);
 
-            navigationController.SetCurrentPageForResume(activeMagazine.Issue, ActivePageNumber);
+            navigationController.SetCurrentPageForResume(ActiveMagazine.Issue, ActivePageNumber);
         }
     }
 

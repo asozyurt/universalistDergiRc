@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)NavigationController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositories\Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BookmarkListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ReadingPageViewModel2.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ReadingPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MenuViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MagazineListViewModel.cs" />
