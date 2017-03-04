@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-using UniversalistDergiRC.DataAccess;
 using UniversalistDergiRC.Repositories;
 using UniversalistDergiRC.Views;
 using Xamarin.Forms;
@@ -25,21 +20,25 @@ namespace UniversalistDergiRC
             CarouselPage menuCarousel = new CarouselPage();
 
             MagazineListView magazineListView = new MagazineListView(navigationController);
-            detailCarousel.Children.Add(magazineListView);
-
+           
             MenuView menuView = new MenuView(navigationController);
             menuCarousel.Title = Constants.UNIVERSALIST_DERGI_TITLE;
             menuCarousel.Children.Add(menuView);
 
+            TabbedPage detailTabPage = new TabbedPage();
+
+            detailTabPage.BarBackgroundColor = Color.FromHex("#80000000");
+            detailTabPage.Children.Add(magazineListView);
+
             MasterDetailPage masterDetail = new MasterDetailPage()
             {
                 Master = menuCarousel,
-                Detail = detailCarousel
+                Detail = detailTabPage
             };
             masterDetail.Title = Constants.UNIVERSALIST_DERGI_TITLE;
             masterDetail.MasterBehavior = MasterBehavior.SplitOnPortrait;
             masterDetail.IsPresentedChanged += IsPresentedChanged;
-            navigationController.InitializeController(masterDetail,detailCarousel, menuCarousel);
+            navigationController.InitializeController(masterDetail,detailTabPage, menuCarousel);
             MainPage = masterDetail;
         }
 
@@ -53,11 +52,9 @@ namespace UniversalistDergiRC
             navigationController.CloseBookmarkListPage();
         }
 
-       
-
         protected override void OnSleep()
         {
-            
+            navigationController.SaveState();
         }
 
         protected override void OnResume()

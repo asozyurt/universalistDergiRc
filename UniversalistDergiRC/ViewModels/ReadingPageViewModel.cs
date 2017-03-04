@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Input;
 using UniversalistDergiRC.Core;
 using UniversalistDergiRC.DataAccess;
@@ -12,22 +11,19 @@ namespace UniversalistDergiRC.ViewModels
     public class ReadingPageViewModel : BaseModel
     {
         private int _activePageIndex;
-        private UriImageSource _activePageUrl = new UriImageSource
-        {
-            Uri = new Uri(Constants.EMPTY_PAGE),
-            CachingEnabled = true,
-            CacheValidity = Constants.DEFAULT_CACHE_VALIDITY
-        };
+        private UriImageSource _activePageUrl;
         private ICommand _addOrRemoveBookmarkCommand;
         private ICommand _goFirstPageCommand;
         private ICommand _goNextPageCommand;
         private ICommand _goPreviousPageCommand;
         private bool _isBookmarked;
         private MagazineDetailModel activeMagazine;
+        private Image imgActivePage;
         private NavigationController navigationController;
 
-        public ReadingPageViewModel(NavigationController navigationController)
+        public ReadingPageViewModel(NavigationController navigationController, Image imgActivePage)
         {
+            this.imgActivePage = imgActivePage;
             this.navigationController = navigationController;
         }
 
@@ -58,6 +54,13 @@ namespace UniversalistDergiRC.ViewModels
         {
             get
             {
+                _activePageUrl = _activePageUrl ?? new UriImageSource
+                {
+                    Uri = new Uri(Constants.EMPTY_PAGE),
+                    CachingEnabled = true,
+                    CacheValidity = Constants.DEFAULT_CACHE_VALIDITY
+                };
+
                 return _activePageUrl;
             }
             set
@@ -160,7 +163,7 @@ namespace UniversalistDergiRC.ViewModels
 
             }
         }
-      
+
         // Default değeri özellikle sıfır yapmadım, bu metodun sayfa numarasıyla çalışmasını istiyorum.
         internal void OpenMagazine(int issueNumber, int pageNumber = 1)
         {
@@ -195,14 +198,7 @@ namespace UniversalistDergiRC.ViewModels
 
         private void goPreviousPage(object obj)
         {
-            if (ActivePageIndex == 0)
-            {
-                navigationController.OpenMagazineListPage();
-            }
-            else
-            {
-                openPage(ActivePageIndex - 1);
-            }
+            openPage(ActivePageIndex - 1);
         }
 
         private void openPage(int pageIndex)
@@ -214,10 +210,23 @@ namespace UniversalistDergiRC.ViewModels
             }
             ActivePageIndex = pageIndex;
             IsBookmarked = activeMagazine.Pages[pageIndex].IsBookMarked;
-            ActivePageUrl.Uri = new Uri(activeMagazine.Pages[pageIndex].SourceURL);
+            ActivePageUrl = new UriImageSource
+            {
+                Uri = new Uri(activeMagazine.Pages[pageIndex].SourceURL),
+                CachingEnabled = true,
+                CacheValidity = Constants.DEFAULT_CACHE_VALIDITY
+            };
 
             navigationController.SetCurrentPageForResume(activeMagazine.Issue, ActivePageNumber);
+
+            resetImagePosition();
+        }
+
+        private void resetImagePosition()
+        {
+            if (imgActivePage == null || imgActivePage.Behaviors.Count == 0 || (imgActivePage.Behaviors[0] as ZoomImageBehavior) == null)
+                return;
+            (imgActivePage.Behaviors[0] as ZoomImageBehavior).ResetToDefaultPosition();
         }
     }
-
 }

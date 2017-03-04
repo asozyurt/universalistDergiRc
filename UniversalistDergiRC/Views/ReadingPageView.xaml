@@ -2,13 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:bhv="clr-namespace:UniversalistDergiRC.Core"
+             Title="OKUYUCU"
+             x:Name="readingPage"
              x:Class="UniversalistDergiRC.Views.ReadingPageView">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="9*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <ContentView VerticalOptions="FillAndExpand"
+                     Grid.RowSpan="3"
                      HorizontalOptions="FillAndExpand">
             <Image x:Name="imgActivePage"
                    Aspect="Fill"
@@ -19,60 +23,42 @@
                 </Image.Behaviors>
             </Image>
         </ContentView>
-
         <ActivityIndicator Grid.Row="0"
+                           Grid.RowSpan="3"
                            VerticalOptions="FillAndExpand"
                            HorizontalOptions="Center"
                            BindingContext="{x:Reference Name=imgActivePage}"
                            IsVisible="{Binding Path=IsLoading}"
                            IsRunning="{Binding Path=IsLoading}" />
-
+        <Button x:Name="btnAddBookmark"
+                BackgroundColor="#80000000"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                Image="{Binding BookmarkIcon}"
+                Command="{Binding AddOrRemoveBookmarkCommand}" />
         <Grid x:Name="grdNavigation"
               VerticalOptions="End"
               HorizontalOptions="CenterAndExpand"
-              Grid.Row="1"
-              BackgroundColor="#2D465F">
+              Grid.Row="2"
+              BackgroundColor="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnGoFirstPage"
-                    BackgroundColor="#2D465F"
-                    Margin="5,0,0,0"
-                    Image="firstPage.png"
-                    Command="{Binding GoFirstPageCommand}"
-                    Grid.Column="0" />
-            <Button x:Name="btnAddBookmark"
-                    BackgroundColor="#2D465F"
-                    Image="{Binding BookmarkIcon}"
-                    Command="{Binding AddOrRemoveBookmarkCommand}"
-                    Grid.Column="1" />
-            <Label x:Name="lblPageNumber"
-                   Grid.Column="2"
-                   HorizontalTextAlignment="Center"
-                   VerticalTextAlignment="Center"
-                   FontSize="Medium"
-                   FontAttributes="Bold"
-                   Text="{Binding ActivePageNumber}"
-                   Margin="1"
-                   BackgroundColor="#2D465F"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   TextColor="Black" />
             <Button x:Name="btnPreviousPage"
-                    BackgroundColor="#2D465F"
-                    Grid.Column="3"
+                    BackgroundColor="#80000000"
+                    HorizontalOptions="Fill"
+                    Grid.Column="0"
                     Image="previousPage.png"
                     Command="{Binding GoPreviousPageCommand}" />
             <Button x:Name="btnNextPage"
-                    Grid.Column="4"
+                    Grid.Column="2"
+                    HorizontalOptions="Fill"
                     Image="nextPage.png"
                     Margin="0,0,5,0"
                     Command="{Binding GoNextPageCommand}"
-                    BackgroundColor="#2D465F">
+                    BackgroundColor="#80000000">
             </Button>
         </Grid>
     </Grid>

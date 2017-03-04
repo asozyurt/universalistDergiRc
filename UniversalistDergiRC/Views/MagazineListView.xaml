@@ -3,24 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:UniversalistDergiRC.ViewModels;assembly=UniversalistDergiRC"
              x:Name="MagazineListPage"
+             Title="UNIVERSALIST SAYILAR"
              xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
              BackgroundImage="listBackground.png"
              x:Class="UniversalistDergiRC.Views.MagazineListView">
     <ContentPage.Content>
-
         <StackLayout>
-            <Label Text="UNIVERSALIST SAYILAR"
-                   HorizontalOptions="Center"
-                   TextColor="White"
-                   FontAttributes="Bold"
-                   FontSize="Medium"
-                   Margin="0,20,0,0" />
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="10" />
                     <RowDefinition Height="3*" />
                     <RowDefinition Height="7*" />
                 </Grid.RowDefinitions>
                 <cv:CarouselView ItemsSource="{Binding MagazineIssueList}"
+                                 Grid.Row="1"
+                                 Position="99"
                                  x:Name="IssuesCarousel">
                     <cv:CarouselView.ItemTemplate>
                         <DataTemplate>
@@ -46,11 +43,11 @@
                     </cv:CarouselView.ItemTemplate>
                 </cv:CarouselView>
                 <StackLayout Orientation="Vertical"
-                             Grid.Row="1"
+                             Grid.Row="2"
                              HorizontalOptions="FillAndExpand">
 
                     <Label Text="İlgili sayıyı okumak için listeden seçim yapabilirsiniz"
-                           Margin="1,3,1,3"
+                           Margin="1,2,1,2"
                            HorizontalOptions="Center"
                            TextColor="White"
                            FontAttributes="Italic"
@@ -67,7 +64,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Grid Margin="5,7,5,7">
+                                    <Grid Margin="5,4,5,4">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="3*" />
                                             <ColumnDefinition Width="7*" />

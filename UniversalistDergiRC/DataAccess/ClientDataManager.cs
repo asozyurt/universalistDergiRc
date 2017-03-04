@@ -32,7 +32,7 @@ namespace UniversalistDergiRC.DataAccess
 
                 stringToBeRemoved.Append(serializedBookmarkText);
 
-                if (startIndex ==0 && serializedBookmarkText.Length < allBookMarks.Length)
+                if (startIndex == 0 && serializedBookmarkText.Length < allBookMarks.Length)
                     stringToBeRemoved.Append(Constants.ITEM_SEPERATOR);
 
                 allBookMarks = allBookMarks.Replace(stringToBeRemoved.ToString(), string.Empty);
@@ -50,7 +50,26 @@ namespace UniversalistDergiRC.DataAccess
 
 
         }
-        
+
+        public static List<BookmarkModel> GetAllBookmarks()
+        {
+            string allBookMarks = DependencyService.Get<IFileOperations>().ReadAllText(Constants.BOOKMARKS_FILENAME);
+
+            List<BookmarkModel> result = new List<BookmarkModel>();
+
+            if (string.IsNullOrEmpty(allBookMarks))
+                return result;
+
+            string[] bookmarkArray = allBookMarks.Split(new[] { Constants.ITEM_SEPERATOR }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var item in bookmarkArray)
+            {
+                BookmarkModel bookmark = BookmarkModel.GenerateFromSerializedText(item);
+                if (bookmark != null)
+                    result.Add(bookmark);
+            }
+            return result;
+        }
+
         public static bool SaveSingleBookMark(int issueNumber, int pageNumber, string userDescription = null)
         {
             bool result = false;
@@ -104,6 +123,36 @@ namespace UniversalistDergiRC.DataAccess
 
         }
 
+        internal static BookmarkModel GetState()
+        {
+            BookmarkModel savedState = null;
+            try
+            {
+                string state = DependencyService.Get<IFileOperations>().ReadAllText(Constants.TEMP_FILENAME);
+
+                string[] stateArray = state.Split(new[] { Constants.ITEM_SEPERATOR }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var item in stateArray)
+                {
+                    savedState = BookmarkModel.GenerateFromSerializedText(item);
+                }
+            }
+            catch (Exception) { }
+
+            return savedState;
+
+        }
+
+        internal static void SaveState(string state)
+        {
+            state = state ?? string.Empty;
+
+            try
+            {
+                DependencyService.Get<IFileOperations>().SaveText(Constants.TEMP_FILENAME, state);
+            }
+            catch (Exception) { }
+        }
+
         internal static void UpdateMagazineIssues(IEnumerable<MagazineSummaryModel> magazineIssueList)
         {
             StringBuilder sb = new StringBuilder();
@@ -120,25 +169,6 @@ namespace UniversalistDergiRC.DataAccess
             DependencyService.Get<IFileOperations>().SaveText(Constants.ISSUES_FILENAME, sb.ToString());
         }
 
-        public static List<BookmarkModel> GetAllBookmarks()
-        {
-            string allBookMarks = DependencyService.Get<IFileOperations>().ReadAllText(Constants.BOOKMARKS_FILENAME);
-
-            List<BookmarkModel> result = new List<BookmarkModel>();
-
-            if (string.IsNullOrEmpty(allBookMarks))
-                return result;
-
-            string[] bookmarkArray = allBookMarks.Split(new[] { Constants.ITEM_SEPERATOR }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var item in bookmarkArray)
-            {
-                BookmarkModel bookmark = BookmarkModel.GenerateFromSerializedText(item);
-                if (bookmark != null)
-                    result.Add(bookmark);
-            }
-            return result;
-        }
-
         private static string serializeBookmark(int issueNumber, int pageNumber)
         {
             return string.Format(Constants.GENERIC_BOOKMARK_FORMAT, issueNumber, pageNumber);
@@ -146,7 +176,7 @@ namespace UniversalistDergiRC.DataAccess
 
         private static string serializeMagazineSummary(MagazineSummaryModel magazineSummary)
         {
-            return string.Format(Constants.GENERIC_ISSUE_FORMAT, magazineSummary.CoverPage.SourceURL, magazineSummary.Issue, magazineSummary.PageCount, magazineSummary.Period, magazineSummary.Title,magazineSummary.SpotDescription);
+            return string.Format(Constants.GENERIC_ISSUE_FORMAT, magazineSummary.CoverPage.SourceURL, magazineSummary.Issue, magazineSummary.PageCount, magazineSummary.Period, magazineSummary.Title, magazineSummary.SpotDescription);
         }
     }
 }

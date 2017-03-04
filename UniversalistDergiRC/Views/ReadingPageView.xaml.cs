@@ -9,7 +9,7 @@ namespace UniversalistDergiRC.Views
         public ReadingPageView(NavigationController navigationController)
         {
             InitializeComponent();
-            BindingContext = new ReadingPageViewModel(navigationController);
+            BindingContext = new ReadingPageViewModel(navigationController, imgActivePage);
         }
     }
 }

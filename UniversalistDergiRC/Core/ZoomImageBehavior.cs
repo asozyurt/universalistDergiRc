@@ -52,7 +52,7 @@ namespace UniversalistDergiRC.Core
             _tapGestureRecognizer.Tapped -= OnTapUpdated;
             _associatedObject.BindingContextChanged -= AssociatedObjectBindingContextChanged;
         }
-        
+
 
         private void OnTapUpdated(object sender, EventArgs e)
         {
@@ -61,23 +61,28 @@ namespace UniversalistDergiRC.Core
                 return;
             }
             // If scale is 1 zoom in for 1.3 scale 
-            if (_parent.Content.Scale != 1)
-            {
-                _parent.Content.TranslationX = 0;
-                _parent.Content.TranslationY = 0;
-
-                _parent.Content.Scale = 1;
-                _currentScale = 1;
-                _xOffset = 0;
-                _yOffset = 0;
-            }
-            // If scale is not 1 set scale to 1 which is its first scale
-            else
+            if (_parent.Content.Scale == 1)
             {
                 OnPinchUpdated(this, new PinchGestureUpdatedEventArgs(GestureStatus.Started, 0, new Point(0, 0)));
                 OnPinchUpdated(this, new PinchGestureUpdatedEventArgs(GestureStatus.Running, 1.3, new Point(0, 0)));
                 OnPinchUpdated(this, new PinchGestureUpdatedEventArgs(GestureStatus.Completed, 0, new Point(0, 0)));
             }
+            // If scale is not 1 set scale to 1 which is its first scale
+            else
+            {
+                ResetToDefaultPosition();
+            }
+        }
+
+        internal void ResetToDefaultPosition()
+        {
+            _parent.Content.TranslationX = 0;
+            _parent.Content.TranslationY = 0;
+
+            _parent.Content.Scale = 1;
+            _currentScale = 1;
+            _xOffset = 0;
+            _yOffset = 0;
         }
 
         /// <summary>
@@ -217,5 +222,6 @@ namespace UniversalistDergiRC.Core
         }
 
         #endregion
+
     }
 }

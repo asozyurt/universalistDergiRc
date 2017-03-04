@@ -1,5 +1,6 @@
-﻿using System;
+﻿using UniversalistDergiRC.DataAccess;
 using UniversalistDergiRC.Model;
+using UniversalistDergiRC.Repositories;
 using UniversalistDergiRC.ViewModels;
 using UniversalistDergiRC.Views;
 using Xamarin.Forms;
@@ -10,32 +11,26 @@ namespace UniversalistDergiRC
     {
         private int currentIssue;
         private int currentPage;
-
-        private CarouselPage detailCarouselPage;
-        private CarouselPage menuCarouselPage;
+        private TabbedPage detailTabPage;
         private MasterDetailPage mainPage;
+        private CarouselPage menuCarouselPage;
 
-        public NavigationController()
-        {
-
-        }
-
-        public void InitializeController(MasterDetailPage mainMasterDetail, CarouselPage detailCarousel, CarouselPage menuCarousel)
+        public void InitializeController(MasterDetailPage mainMasterDetail, TabbedPage detailCarousel, CarouselPage menuCarousel)
         {
             menuCarouselPage = menuCarousel;
-            detailCarouselPage = detailCarousel;
+            detailTabPage = detailCarousel;
             mainPage = mainMasterDetail;
         }
 
         public void OpenReadingPage(int issueNumber, int pageNumber)
         {
-            if (detailCarouselPage == null || issueNumber == 0)
+            if (detailTabPage == null || issueNumber == 0)
                 return;
 
-            if (detailCarouselPage.Children.Count == 1)
-                detailCarouselPage.Children.Add(new ReadingPageView(this));
+            if (detailTabPage.Children.Count == 1)
+                detailTabPage.Children.Add(new ReadingPageView(this));
 
-            ReadingPageView readingPage = detailCarouselPage.Children[1] as ReadingPageView;
+            ReadingPageView readingPage = detailTabPage.Children[1] as ReadingPageView;
 
             if (readingPage == null) return;
 
@@ -43,11 +38,20 @@ namespace UniversalistDergiRC
 
             ReadingPageViewModel vmReadingPage = readingPage.BindingContext as ReadingPageViewModel;
             if (vmReadingPage == null) return;
-            detailCarouselPage.IsBusy = true;
+            detailTabPage.IsBusy = true;
             vmReadingPage.OpenMagazine(issueNumber, pageNumber);
-            detailCarouselPage.IsBusy = false;
+            detailTabPage.IsBusy = false;
 
-            detailCarouselPage.CurrentPage = detailCarouselPage.Children[1];
+            detailTabPage.CurrentPage = detailTabPage.Children[1];
+
+            SetCurrentPageForResume(0, 0);
+        }
+
+        internal void CloseBookmarkListPage()
+        {
+            if (menuCarouselPage == null || menuCarouselPage.Children.Count == 0)
+                return;
+            menuCarouselPage.CurrentPage = menuCarouselPage.Children[0];
         }
 
         internal void OpenBookmarkListPage()
@@ -72,36 +76,44 @@ namespace UniversalistDergiRC
             menuCarouselPage.CurrentPage = menuCarouselPage.Children[1];
         }
 
-        internal void CloseBookmarkListPage()
-        {
-            if (menuCarouselPage == null || menuCarouselPage.Children.Count == 0)
-                return;
-            menuCarouselPage.CurrentPage = menuCarouselPage.Children[0];
-        }
-
         internal void OpenMagazineListPage()
         {
-            if (detailCarouselPage == null || detailCarouselPage.Children.Count == 0)
+            if (detailTabPage == null || detailTabPage.Children.Count == 0)
                 return;
             mainPage.IsPresented = false;
-            detailCarouselPage.CurrentPage = detailCarouselPage.Children[0];
+            detailTabPage.CurrentPage = detailTabPage.Children[0];
+            SetCurrentPageForResume(0, 0);
+
+            if (detailTabPage.Children.Count > 1)
+                detailTabPage.Children.RemoveAt(1);
+        }
+
+        internal async void ResumeAsync()
+        {
+            BookmarkModel savedState = ClientDataManager.GetState();
+
+            if (savedState != null)
+            {
+                var resumeSelected = await mainPage.DisplayAlert("UNIVERSALIST DERGI", "Kaldığınız yerden devam etmek ister misiniz?", "Evet", "Hayır");
+
+                if (resumeSelected)
+                    OpenReadingPage(savedState.IssueNumber, savedState.PageNumber);
+            }
+        }
+
+        internal void SaveState()
+        {
+            string state = string.Empty;
+
+            if (currentIssue > 0 && currentPage > 0)
+                state = string.Format(Constants.GENERIC_STATE_FORMAT, currentIssue, currentIssue);
+            ClientDataManager.SaveState(state);
         }
 
         internal void SetCurrentPageForResume(int issue, int activePageNumber)
         {
             currentIssue = issue;
             currentPage = activePageNumber;
-        }
-
-        internal async void ResumeAsync()
-        {
-            if (currentIssue > 0 && currentPage > 0)
-            {
-                var resumeSelected = await mainPage.DisplayAlert("UNIVERSALIST DERGI", "Kaldığınız yerden devam etmek ister misiniz?", "Evet", "Hayır");
-
-                if(resumeSelected)
-                    OpenReadingPage(currentIssue, currentPage);
-            }
         }
     }
 }
