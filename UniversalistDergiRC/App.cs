@@ -51,16 +51,5 @@ namespace UniversalistDergiRC
         {
             navigationController.CloseBookmarkListPage();
         }
-
-        protected override void OnSleep()
-        {
-            navigationController.SaveState();
-        }
-
-        protected override void OnResume()
-        {
-            navigationController.ResumeAsync();
-        }
-        
     }
 }

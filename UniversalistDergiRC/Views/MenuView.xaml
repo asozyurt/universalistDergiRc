@@ -12,10 +12,10 @@
             <Label VerticalOptions="StartAndExpand"
                    Margin="0,5,0,5"
                    FontSize="Medium"
-                   TextColor="Black"
+                   TextColor="White"
                    HorizontalOptions="CenterAndExpand"
                    HorizontalTextAlignment="Center"
-                   Text="UNIVERSALIST DERGI (Beta App)" />
+                   Text="UNIVERSALIST DERGI" />
             <StackLayout VerticalOptions="CenterAndExpand"
                          Margin="0,5,0,20">
                 

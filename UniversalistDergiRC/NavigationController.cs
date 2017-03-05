@@ -1,7 +1,4 @@
-﻿using UniversalistDergiRC.DataAccess;
-using UniversalistDergiRC.Model;
-using UniversalistDergiRC.Repositories;
-using UniversalistDergiRC.ViewModels;
+﻿using UniversalistDergiRC.ViewModels;
 using UniversalistDergiRC.Views;
 using Xamarin.Forms;
 
@@ -43,8 +40,6 @@ namespace UniversalistDergiRC
             detailTabPage.IsBusy = false;
 
             detailTabPage.CurrentPage = detailTabPage.Children[1];
-
-            SetCurrentPageForResume(0, 0);
         }
 
         internal void CloseBookmarkListPage()
@@ -82,40 +77,9 @@ namespace UniversalistDergiRC
                 return;
             mainPage.IsPresented = false;
             detailTabPage.CurrentPage = detailTabPage.Children[0];
-            SetCurrentPageForResume(0, 0);
 
             if (detailTabPage.Children.Count > 1)
                 detailTabPage.Children.RemoveAt(1);
-        }
-
-        internal async void ResumeAsync()
-        {
-            BookmarkModel savedState = ClientDataManager.GetState();
-
-            if (savedState != null)
-            {
-                var resumeSelected = await mainPage.DisplayAlert("UNIVERSALIST DERGI", "Kaldığınız yerden devam etmek ister misiniz?", "Evet", "Hayır");
-
-                if (resumeSelected)
-                    OpenReadingPage(savedState.IssueNumber, savedState.PageNumber);
-                else
-                    OpenMagazineListPage();
-            }
-        }
-
-        internal void SaveState()
-        {
-            string state = string.Empty;
-
-            if (currentIssue > 0 && currentPage > 0)
-                state = string.Format(Constants.GENERIC_STATE_FORMAT, currentIssue, currentIssue);
-            ClientDataManager.SaveState(state);
-        }
-
-        internal void SetCurrentPageForResume(int issue, int activePageNumber)
-        {
-            currentIssue = issue;
-            currentPage = activePageNumber;
         }
     }
 }

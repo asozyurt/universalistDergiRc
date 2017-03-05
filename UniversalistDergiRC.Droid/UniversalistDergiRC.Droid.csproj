@@ -138,9 +138,6 @@
     <AndroidResource Include="Resources\Drawable\savedBookmarkMini.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\firstPage.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\Drawable\nextPage.png" />
   </ItemGroup>
   <ItemGroup>

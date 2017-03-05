@@ -17,7 +17,6 @@
                 </Grid.RowDefinitions>
                 <cv:CarouselView ItemsSource="{Binding MagazineIssueList}"
                                  Grid.Row="1"
-                                 Position="99"
                                  x:Name="IssuesCarousel">
                     <cv:CarouselView.ItemTemplate>
                         <DataTemplate>

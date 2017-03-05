@@ -205,7 +205,6 @@ namespace UniversalistDergiRC.ViewModels
         {
             if (pageIndex < 0 || activeMagazine == null || pageIndex >= activeMagazine.Pages.Count)
             {
-                navigationController.SetCurrentPageForResume(0, 0);
                 return;
             }
             ActivePageIndex = pageIndex;
@@ -216,8 +215,6 @@ namespace UniversalistDergiRC.ViewModels
                 CachingEnabled = true,
                 CacheValidity = Constants.DEFAULT_CACHE_VALIDITY
             };
-
-            navigationController.SetCurrentPageForResume(activeMagazine.Issue, ActivePageNumber);
 
             resetImagePosition();
         }
