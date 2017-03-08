@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Magazines>
+  <Magazine>
+    <Title>Universalist 1. Sayı</Title>
+    <Issue>1</Issue>
+    <Period>Ocak-Şubat 2016</Period>
+    <CoverPage>http://www.durumbilgisi.com/Sayi1/cover_mini.jpg</CoverPage>
+    <TotalPageCount>86</TotalPageCount>
+	<SpotDescription>İSLAM'IN UZAYDAKİ KÖKENİ</SpotDescription>
+  </Magazine>
+  <Magazine>
+    <Title>Universalist 2. Sayı</Title>
+    <Issue>2</Issue>
+    <Period>15 Mart-15 Mayıs 2016</Period>
+    <CoverPage>http://www.durumbilgisi.com/Sayi2/cover_mini.jpg</CoverPage>
+    <TotalPageCount>66</TotalPageCount>
+	<SpotDescription>EVRİMİN KUTSAL REFERANSLARI</SpotDescription>
+  </Magazine>
+  <Magazine>
+    <Title>Universalist 3. Sayı</Title>
+    <Issue>3</Issue>
+    <Period>15 Mayıs-15 Temmuz 2016</Period>
+    <CoverPage>http://www.durumbilgisi.com/Sayi3/cover_mini.jpg</CoverPage>
+    <TotalPageCount>66</TotalPageCount>
+	<SpotDescription>60.TEPE:GELİBOLU 1915</SpotDescription>
+  </Magazine>
+  <Magazine>
+    <Title>Universalist 4. Sayı</Title>
+    <Issue>4</Issue>
+    <Period>1 Ağustos-1 Ekim 2016</Period>
+    <CoverPage>http://www.durumbilgisi.com/Sayi4/cover_mini.jpg</CoverPage>
+    <TotalPageCount>54</TotalPageCount>
+	<SpotDescription>BÜYÜK KEHANET: KIYAMET PROJESİ</SpotDescription>
+  </Magazine>
+  <Magazine>
+    <Title>Universalist 5. Sayı</Title>
+    <Issue>5</Issue>
+    <Period>1 Ocak-1 Nisan 2017</Period>
+    <CoverPage>http://www.durumbilgisi.com/Sayi5/cover_mini.jpg</CoverPage>
+    <TotalPageCount>46</TotalPageCount>
+	<SpotDescription>2023 ÇÖZÜM YA DA KAOS YILI</SpotDescription>
+  </Magazine>
+</Magazines>

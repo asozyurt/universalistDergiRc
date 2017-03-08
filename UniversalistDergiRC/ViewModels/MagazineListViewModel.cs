@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using UniversalistDergiRC.Core;
 using UniversalistDergiRC.DataAccess;
@@ -119,7 +120,14 @@ namespace UniversalistDergiRC.ViewModels
         private void refreshMagazineIssueList(bool tryLocal)
         {
             IsRefreshing = true;
-            MagazineIssueList = DataAccessManager.GetMagazineIssues(tryLocal);
+            try
+            {
+                MagazineIssueList = DataAccessManager.GetMagazineIssues(tryLocal);
+            }
+            catch
+            {
+                MessagingCenter.Send(this, Constants.CONNECTION_ERROR_MESSAGEKEY);
+            }
             IsRefreshing = false;
         }
 

@@ -5,7 +5,7 @@ using Android.OS;
 
 namespace UniversalistDergiRC.Droid
 {
-    [Activity(Label = "Universalist Dergi", Icon = "@drawable/icon", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {
@@ -23,9 +23,14 @@ namespace UniversalistDergiRC.Droid
         public override void OnBackPressed()
         {
             if (loadedApp != null)
-                loadedApp.DroidOnBackPressed();
-            else
-                base.OnBackPressed();
+            {
+                // Application decides to execute 'base.OnBackPressed()'
+                bool executeMainMethod = loadedApp.DroidOnBackPressed();
+
+                if (!executeMainMethod)
+                    return;
+            }
+            base.OnBackPressed();
         }
     }
 }

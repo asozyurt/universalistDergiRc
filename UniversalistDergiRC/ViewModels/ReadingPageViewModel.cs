@@ -18,12 +18,10 @@ namespace UniversalistDergiRC.ViewModels
         private ICommand _goPreviousPageCommand;
         private bool _isBookmarked;
         private MagazineDetailModel activeMagazine;
-        private Image imgActivePage;
         private NavigationController navigationController;
 
-        public ReadingPageViewModel(NavigationController navigationController, Image imgActivePage)
+        public ReadingPageViewModel(NavigationController navigationController)
         {
-            this.imgActivePage = imgActivePage;
             this.navigationController = navigationController;
         }
 
@@ -188,6 +186,7 @@ namespace UniversalistDergiRC.ViewModels
             {
                 IsBookmarked = !IsBookmarked;
                 activeMagazine.Pages[ActivePageIndex].IsBookMarked = IsBookmarked;
+                MessagingCenter.Send(this, Constants.ANIMATE_IMAGE_MESSAGEKEY);
             }
         }
 
@@ -203,10 +202,12 @@ namespace UniversalistDergiRC.ViewModels
 
         private void openPage(int pageIndex)
         {
+            
             if (pageIndex < 0 || activeMagazine == null || pageIndex >= activeMagazine.Pages.Count)
             {
                 return;
             }
+
             ActivePageIndex = pageIndex;
             IsBookmarked = activeMagazine.Pages[pageIndex].IsBookMarked;
             ActivePageUrl = new UriImageSource
@@ -216,14 +217,9 @@ namespace UniversalistDergiRC.ViewModels
                 CacheValidity = Constants.DEFAULT_CACHE_VALIDITY
             };
 
-            resetImagePosition();
+            MessagingCenter.Send(this, Constants.RESET_IMAGE_POSITION_MESSAGEKEY);
         }
 
-        private void resetImagePosition()
-        {
-            if (imgActivePage == null || imgActivePage.Behaviors.Count == 0 || (imgActivePage.Behaviors[0] as ZoomImageBehavior) == null)
-                return;
-            (imgActivePage.Behaviors[0] as ZoomImageBehavior).ResetToDefaultPosition();
-        }
+      
     }
 }

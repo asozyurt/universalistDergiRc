@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
 
 namespace UniversalistDergiRC.Repositories
 {
@@ -27,10 +24,18 @@ namespace UniversalistDergiRC.Repositories
         public static readonly string BOOKMARK_NORMAL_ICON = "bookmark.png";
         public static readonly string BOOKMARK_SAVED_ICON = "savedBookmark.png";
 
-        public static readonly TimeSpan DEFAULT_CACHE_VALIDITY = new TimeSpan(7, 0, 5, 0);
+        public static readonly TimeSpan DEFAULT_CACHE_VALIDITY = new TimeSpan(30, 0, 0, 0);
 
-        public static readonly string EMPTY_PAGE = "http://www.durumbilgisi.com/empty_page.xml";
+        public static readonly string EMPTY_PAGE = "http://www.durumbilgisi.com/empty_page.png";
 
+        public static readonly string CONNECTION_ERROR_TITLE = "Bağlantı Hatası";
+        public static readonly string CONNECTION_ERROR_MESSAGE = "İnternet bağlantınızı kontrol ediniz!";
+        public static readonly string CONNECTION_ERROR_MESSAGEKEY = "ConnectionErrorMessage";
 
+        public static readonly string OK = "Tamam";
+
+        public static readonly string RESET_IMAGE_POSITION_MESSAGEKEY = "ResetImagePosition";
+
+        public static string ANIMATE_IMAGE_MESSAGEKEY = "AnimateImage";
     }
 }

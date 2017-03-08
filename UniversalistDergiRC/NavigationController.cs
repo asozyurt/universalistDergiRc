@@ -1,4 +1,5 @@
-﻿using UniversalistDergiRC.ViewModels;
+﻿using System;
+using UniversalistDergiRC.ViewModels;
 using UniversalistDergiRC.Views;
 using Xamarin.Forms;
 
@@ -47,6 +48,11 @@ namespace UniversalistDergiRC
             if (menuCarouselPage == null || menuCarouselPage.Children.Count == 0)
                 return;
             menuCarouselPage.CurrentPage = menuCarouselPage.Children[0];
+        }
+
+        internal bool IsMagazineListActive()
+        {
+            return detailTabPage != null && (detailTabPage.CurrentPage as MagazineListView) != null;
         }
 
         internal void OpenBookmarkListPage()

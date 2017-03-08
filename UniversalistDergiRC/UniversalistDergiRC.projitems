@@ -59,6 +59,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)unv_sayilar.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Repositories\unv_sayilar.xml" />
   </ItemGroup>
 </Project>

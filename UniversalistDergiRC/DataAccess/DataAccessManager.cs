@@ -14,10 +14,17 @@ namespace UniversalistDergiRC.DataAccess
         {
             if (tryLocal)
             {
-                ObservableCollection<MagazineSummaryModel> result = ClientDataManager.GetMagazineIssues();
+                try
+                {
+                    ObservableCollection<MagazineSummaryModel> result = ClientDataManager.GetMagazineIssues();
 
-                if (result != null && result.Count > 0)
-                    return result;
+                    if (result != null && result.Count > 0)
+                        return result;
+                }
+                catch
+                {
+                    // Local cache read error. Continue with online.
+                }
             }
 
             XDocument document = XDocument.Load(Constants.MAGAZINE_SUMMARY_LIST_URL);
@@ -41,14 +48,15 @@ namespace UniversalistDergiRC.DataAccess
             return new ObservableCollection<MagazineSummaryModel>(q);
         }
 
-        public static MagazineDetailModel GetMagazineIssueDetail(int  issueNumber)
+        public static MagazineDetailModel GetMagazineIssueDetail(int issueNumber)
         {
             var magazineList = GetMagazineIssues(true);
             var selectedIssue = magazineList.FirstOrDefault(x => x.Issue == issueNumber);
 
             if (selectedIssue == null) return null;
 
-            MagazineDetailModel magazineDetail = new MagazineDetailModel() {
+            MagazineDetailModel magazineDetail = new MagazineDetailModel()
+            {
                 Issue = issueNumber
             };
             List<BookmarkModel> bookMarks = ClientDataManager.GetAllBookmarks();
@@ -65,7 +73,7 @@ namespace UniversalistDergiRC.DataAccess
                                    {
                                        SourceURL = url,
                                        PageNumber = pageNumber,
-                                       IsBookMarked = bookMarks.Any(x => x.IssueNumber==issueNumber && x.PageNumber == pageNumber)
+                                       IsBookMarked = bookMarks.Any(x => x.IssueNumber == issueNumber && x.PageNumber == pageNumber)
                                    });
             }
             return magazineDetail;

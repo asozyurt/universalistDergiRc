@@ -8,9 +8,22 @@ namespace UniversalistDergiRC
     public class App : Application
     {
         NavigationController navigationController;
+
         public App()
         {
             navigationController = new NavigationController();
+
+        }
+
+        // Only available in Android
+        internal bool DroidOnBackPressed()
+        {
+            // If active page is magazine list, then allow program to execute base.BackButtonPressed
+            if (navigationController.IsMagazineListActive())
+                return true;
+
+            navigationController.OpenMagazineListPage();
+            return false;
         }
 
         protected override void OnStart()
@@ -20,7 +33,7 @@ namespace UniversalistDergiRC
             CarouselPage menuCarousel = new CarouselPage();
 
             MagazineListView magazineListView = new MagazineListView(navigationController);
-           
+
             MenuView menuView = new MenuView(navigationController);
             menuCarousel.Title = Constants.UNIVERSALIST_DERGI_TITLE;
             menuCarousel.Children.Add(menuView);
@@ -38,13 +51,8 @@ namespace UniversalistDergiRC
             masterDetail.Title = Constants.UNIVERSALIST_DERGI_TITLE;
             masterDetail.MasterBehavior = MasterBehavior.SplitOnPortrait;
             masterDetail.IsPresentedChanged += IsPresentedChanged;
-            navigationController.InitializeController(masterDetail,detailTabPage, menuCarousel);
+            navigationController.InitializeController(masterDetail, detailTabPage, menuCarousel);
             MainPage = masterDetail;
-        }
-
-        internal void DroidOnBackPressed()
-        {
-            navigationController.OpenMagazineListPage();
         }
 
         private void IsPresentedChanged(object sender, EventArgs e)

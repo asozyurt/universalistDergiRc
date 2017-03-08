@@ -53,7 +53,7 @@
                            FontSize="Small"></Label>
                     <ListView HasUnevenRows="True"
                               x:Name="lstMagazines"
-                              SeparatorColor="Red"
+                              SeparatorColor="Navy"
                               ItemsSource="{Binding MagazineIssueList}"
                               IsPullToRefreshEnabled="True"
                               RefreshCommand="{Binding Path=BindingContext.RefreshCommand,
