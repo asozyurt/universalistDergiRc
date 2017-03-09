@@ -5,50 +5,61 @@
              BackgroundColor="#648BAA"
              x:Class="UniversalistDergiRC.Views.BookmarkListView">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical"
-                     HorizontalOptions="FillAndExpand">
-
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="9*"></RowDefinition>
+            </Grid.RowDefinitions>
             <Label Text="İŞARETLEDİKLERİM"
-                   Margin="1,25,1,5"
-                   HorizontalOptions="Center"
+                   Margin="0,0,0,15"
+                   HorizontalOptions="FillAndExpand"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   MinimumHeightRequest="50"
+                   BackgroundColor="#80000000"
                    TextColor="White"
                    FontAttributes="Bold"
                    FontSize="Medium" />
-            <Label Text="İlgili sayfaya gitmek için listeden seçim yapabilirsiniz"
-                   Margin="1,25,1,5"
-                   HorizontalOptions="Center"
-                   TextColor="Silver"
-                   FontAttributes="Italic"
-                   FontSize="Small"></Label>
-            <ListView HasUnevenRows="True"
-                      x:Name="lstBookmarks"
-                      Margin="1,5,1,5"
-                      SeparatorColor="#24364F"
-                      SelectedItem="{Binding SelectedBookmark}"
-                      ItemsSource="{Binding BookmarkList}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid Margin="5,5,2,1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="7*" />
-                                </Grid.ColumnDefinitions>
-                                <Image Grid.Column="0"
-                                       Margin="5,15,2,5"
-                                       BackgroundColor="Transparent"
-                                       Source="savedBookmarkMini.png" />
-                                <Label Text="{Binding Description}"
-                                       Grid.Column="1"
-                                       Margin="5,15,2,5"
-                                       FontSize="Medium"
-                                       TextColor="White"></Label>
-                            </Grid>
+            <StackLayout Orientation="Vertical"
+                         Grid.Row="1"
+                         HorizontalOptions="FillAndExpand">
 
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+                <Label Text="İlgili sayfaya gitmek için listeden seçim yapabilirsiniz"
+                       Margin="1,15,1,5"
+                       HorizontalOptions="Center"
+                       TextColor="White"
+                       FontAttributes="Italic"
+                       FontSize="Small"></Label>
+                <ListView HasUnevenRows="True"
+                          x:Name="lstBookmarks"
+                          Margin="1,5,1,5"
+                          SeparatorColor="#24364F"
+                          SelectedItem="{Binding SelectedBookmark}"
+                          ItemsSource="{Binding BookmarkList}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Margin="5,10,5,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="5*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0"
+                                           BackgroundColor="Transparent"
+                                           Source="savedBookmarkMini.png" />
+                                    <Label Text="{Binding Description}"
+                                           Grid.Column="1"
+                                           HorizontalOptions="StartAndExpand"
+                                           FontSize="Medium"
+                                           TextColor="White"></Label>
+                                </Grid>
+
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </Grid>
+
     </ContentPage.Content>
 </ContentPage>

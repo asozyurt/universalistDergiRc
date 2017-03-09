@@ -12,7 +12,6 @@ namespace UniversalistDergiRC
         public App()
         {
             navigationController = new NavigationController();
-
         }
 
         // Only available in Android

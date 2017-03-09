@@ -15,32 +15,48 @@
                     <RowDefinition Height="3*" />
                     <RowDefinition Height="7*" />
                 </Grid.RowDefinitions>
-                <cv:CarouselView ItemsSource="{Binding MagazineIssueList}"
-                                 Grid.Row="1"
-                                 x:Name="IssuesCarousel">
-                    <cv:CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image Grid.RowSpan="2"
-                                       Aspect="AspectFit"
-                                       Source="{Binding CoverPage.SourceURL}" />
-                                <StackLayout Grid.Row="1"
-                                             BackgroundColor="#80000000"
-                                             Padding="7">
-                                    <Label TextColor="White"
-                                           Text="{Binding SpotDescription}"
-                                           FontSize="14"
-                                           HorizontalOptions="Center"
-                                           VerticalOptions="CenterAndExpand" />
-                                </StackLayout>
-                            </Grid>
-                        </DataTemplate>
-                    </cv:CarouselView.ItemTemplate>
-                </cv:CarouselView>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="6*" />
+
+                    </Grid.ColumnDefinitions>
+                    <cv:CarouselView ItemsSource="{Binding MagazineIssueList}"
+                                     Grid.ColumnSpan="2"
+                                     x:Name="IssuesCarousel">
+                        <cv:CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Image Grid.RowSpan="2"
+                                           Aspect="AspectFit"
+                                           Source="{Binding CoverPage.SourceURL}" />
+                                    <StackLayout Grid.Row="1"
+                                                 BackgroundColor="#80000000"
+                                                 Padding="7">
+                                        <Label TextColor="White"
+                                               Text="{Binding SpotDescription}"
+                                               FontSize="14"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="CenterAndExpand" />
+                                    </StackLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </cv:CarouselView.ItemTemplate>
+                    </cv:CarouselView>
+                    <Button BackgroundColor="Transparent"
+                            VerticalOptions="Start"
+                            Margin="0,-20,0,0"
+                            Command="{Binding OpenMasterPageCommand}"
+                            Image="masterPage.png" />
+
+                </Grid>
+
+
                 <StackLayout Orientation="Vertical"
                              Grid.Row="2"
                              HorizontalOptions="FillAndExpand">
@@ -77,13 +93,14 @@
                                                      VerticalOptions="Center"
                                                      HorizontalOptions="StartAndExpand">
                                             <Label Text="{Binding Title}"
-                                                   FontSize="Medium"
+                                                   FontSize="16"
                                                    FontAttributes="Bold"
                                                    TextColor="White"></Label>
                                             <Label Text="{Binding SpotDescription}"
+                                                   FontSize="15"
                                                    TextColor="White"></Label>
                                             <Label Text="{Binding Period}"
-                                                   FontSize="Micro"
+                                                   FontSize="14"
                                                    TextColor="Navy"></Label>
                                         </StackLayout>
 

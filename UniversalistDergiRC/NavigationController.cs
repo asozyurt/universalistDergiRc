@@ -7,8 +7,6 @@ namespace UniversalistDergiRC
 {
     public class NavigationController
     {
-        private int currentIssue;
-        private int currentPage;
         private TabbedPage detailTabPage;
         private MasterDetailPage mainPage;
         private CarouselPage menuCarouselPage;
@@ -86,6 +84,12 @@ namespace UniversalistDergiRC
 
             if (detailTabPage.Children.Count > 1)
                 detailTabPage.Children.RemoveAt(1);
+        }
+
+        internal void OpenMasterPage()
+        {
+            if (mainPage != null && !mainPage.IsPresented)
+                mainPage.IsPresented = true;
         }
     }
 }

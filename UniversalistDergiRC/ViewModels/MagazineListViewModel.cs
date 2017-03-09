@@ -72,6 +72,29 @@ namespace UniversalistDergiRC.ViewModels
             }
         }
 
+        private ICommand _openMasterPageCommand;
+            public ICommand OpenMasterPageCommand
+        {
+            get
+            {
+                _openMasterPageCommand = _openMasterPageCommand ?? new Command(openMasterPage);
+                return _openMasterPageCommand;
+            }
+            set
+            {
+                if (_openMasterPageCommand != value)
+                {
+                    _openMasterPageCommand = value;
+                    OnPropertyChanged(() => OpenMasterPageCommand);
+                }
+            }
+        }
+
+        private void openMasterPage()
+        {
+            _navigationController.OpenMasterPage();
+        }
+
         public ICommand RefreshCommand
         {
             get

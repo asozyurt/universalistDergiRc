@@ -5,50 +5,96 @@
              BackgroundColor="#2D465F"
              Title="{Binding Title}">
     <ContentPage.Content>
-        <StackLayout>
-            <Image VerticalOptions="StartAndExpand"
-                   Margin="0,25,0,5"
-                   Source="Icon.png" />
-            <Label VerticalOptions="StartAndExpand"
-                   Margin="0,5,0,5"
-                   FontSize="Medium"
-                   TextColor="White"
-                   HorizontalOptions="CenterAndExpand"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="9*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Text="UNIVERSALIST DERGİ"
+                   Margin="0,0,0,10"
+                   BackgroundColor="#80000000"
+                   HorizontalOptions="FillAndExpand"
                    HorizontalTextAlignment="Center"
-                   Text="UNIVERSALIST DERGI" />
-            <StackLayout VerticalOptions="CenterAndExpand"
-                         Margin="0,5,0,20">
-                
-                <Button Text="DERGİ LİSTESİ"
-                        BackgroundColor="Transparent"
-                        TextColor="White"
-                        FontAttributes="Bold"
-                        Command="{Binding OpenMagazineListCommand}" />
-                <Button Text="UNIVERSALIST DERGİ"
-                        BackgroundColor="Transparent"
-                        TextColor="White"
-                        FontAttributes="Bold"
-                        Command="{Binding OpenOfficialSiteCommand}" />
+                   VerticalTextAlignment="Center"
+                   MinimumHeightRequest="50"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   FontSize="Medium" />
+            <StackLayout Grid.Row="1">
 
-                <Button Text="İŞARETLEDİKLERİM"
-                        BackgroundColor="Transparent"
-                        TextColor="White"
-                        FontAttributes="Bold"
-                        Command="{Binding OpenBookmarkListCommand}" />
+                <Image VerticalOptions="Start"
+                       Margin="0,10,0,5"
+                       Source="Icon.png" />
+                <StackLayout VerticalOptions="CenterAndExpand"
+                             Margin="0,5,0,20">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Button Image="listPage.png"
+                                BackgroundColor="Transparent"
+                                Command="{Binding OpenMagazineListCommand}"
+                                HorizontalOptions="Center"></Button>
+                        <Button Text="DERGİ LİSTESİ"
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                HorizontalOptions="StartAndExpand"
+                                BackgroundColor="Transparent"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                Command="{Binding OpenMagazineListCommand}" />
+
+                        <Button Image="bookmarks.png"
+                                HorizontalOptions="Center"
+                                BackgroundColor="Transparent"
+                                Grid.Row="1"
+                                Command="{Binding OpenBookmarkListCommand}" />
+                        <Button Text="İŞARETLEDİKLERİM"
+                                BackgroundColor="Transparent"
+                                Grid.Column="1"
+                                Grid.Row="1"
+                                TextColor="White"
+                                HorizontalOptions="StartAndExpand"
+                                FontAttributes="Bold"
+                                Command="{Binding OpenBookmarkListCommand}" />
+                        
+                        <Button Image="website.png"
+                                HorizontalOptions="Center"
+                                BackgroundColor="Transparent"
+                                Command="{Binding OpenOfficialSiteCommand}"
+                                Grid.Row="2"></Button>
+                        <Button Text="UNIVERSALIST DERGİ"
+                                BackgroundColor="Transparent"
+                                Grid.Column="1"
+                                Grid.Row="2"
+                                HorizontalOptions="StartAndExpand"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                Command="{Binding OpenOfficialSiteCommand}" />
+                     
+                    </Grid>
+
+                </StackLayout>
+                <StackLayout VerticalOptions="End"
+                             Margin="0,0,0,10"
+                             BackgroundColor="Transparent">
+                    <Label Text="Geliştirici"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           FontAttributes="Italic"
+                           TextColor="White" />
+                    <Button BackgroundColor="Transparent"
+                            Image="asozyurt.png"
+                            Command="{Binding OpenDevelopersSiteCommand}" />
+                </StackLayout>
 
             </StackLayout>
-            <StackLayout VerticalOptions="End"
-                         BackgroundColor="Transparent">
-                <Label Text="Geliştirici"
-                       HorizontalTextAlignment="Center"
-                       VerticalTextAlignment="Center"
-                       FontAttributes="Italic"
-                       TextColor="White" />
-                <Button BackgroundColor="Transparent"
-                        Image="asozyurt.png"
-                        Command="{Binding OpenDevelopersSiteCommand}" />
-            </StackLayout>
-
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -19,7 +19,9 @@ namespace UniversalistDergiRC.DataAccess
                     ObservableCollection<MagazineSummaryModel> result = ClientDataManager.GetMagazineIssues();
 
                     if (result != null && result.Count > 0)
-                        return result;
+                    {
+                        return new ObservableCollection<MagazineSummaryModel>(result.OrderByDescending(x => x.Issue));
+                    }
                 }
                 catch
                 {
@@ -45,7 +47,7 @@ namespace UniversalistDergiRC.DataAccess
 
             ClientDataManager.UpdateMagazineIssues(q);
 
-            return new ObservableCollection<MagazineSummaryModel>(q);
+            return new ObservableCollection<MagazineSummaryModel>(q.OrderByDescending(x=>x.Issue));
         }
 
         public static MagazineDetailModel GetMagazineIssueDetail(int issueNumber)
