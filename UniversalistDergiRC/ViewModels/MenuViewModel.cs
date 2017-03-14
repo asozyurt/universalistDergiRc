@@ -105,22 +105,24 @@ namespace UniversalistDergiRC.ViewModels
 
         private void openBookmarkList(object obj)
         {
+            if (navigationController == null) return;
             navigationController.OpenBookmarkListPage();
         }
 
         private void openDevelopersSite(object obj)
         {
-            Device.OpenUri(new Uri("http://asozyurt.com"));
+            Device.OpenUri(new Uri(Constants.DEVELOPERS_WEBSITE));
         }
 
         private void openMagazineList(object obj)
         {
+            if (navigationController == null) return;
             navigationController.OpenMagazineListPage();
         }
 
         private void openOfficialSite(object obj)
         {
-            Device.OpenUri(new Uri("http://universalistdergi.org"));
+            Device.OpenUri(new Uri(Constants.MAGAZINE_WEBSITE ));
         }
     }
 }

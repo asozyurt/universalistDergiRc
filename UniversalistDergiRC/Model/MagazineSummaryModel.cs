@@ -6,39 +6,25 @@ namespace UniversalistDergiRC.Model
 {
     public class MagazineSummaryModel : BaseModel
     {
-        private int _issue;
-        private string _title;
         private MagazinePageModel _coverPage;
-        private string _period;
+        private int _issue;
         private int _pageCount;
+        private string _period;
         private string _spotDescription;
-        public string SpotDescription
+        private string _title;
+
+        public MagazinePageModel CoverPage
         {
             get
             {
-                return _spotDescription;
+                return _coverPage;
             }
             set
             {
-                if (_spotDescription != value)
+                if (_coverPage != value)
                 {
-                    _spotDescription = value;
-                    OnPropertyChanged(() => SpotDescription);
-                }
-            }
-        }
-        public string Title
-        {
-            get
-            {
-                return _title;
-            }
-            set
-            {
-                if (_title != value)
-                {
-                    _title = value;
-                    OnPropertyChanged(() => Title);
+                    _coverPage = value;
+                    OnPropertyChanged(() => CoverPage);
                 }
             }
         }
@@ -59,18 +45,18 @@ namespace UniversalistDergiRC.Model
             }
         }
 
-        public MagazinePageModel CoverPage
+        public int PageCount
         {
             get
             {
-                return _coverPage;
+                return _pageCount;
             }
             set
             {
-                if (_coverPage != value)
+                if (_pageCount != value)
                 {
-                    _coverPage = value;
-                    OnPropertyChanged(() => CoverPage);
+                    _pageCount = value;
+                    OnPropertyChanged(() => PageCount);
                 }
             }
         }
@@ -91,18 +77,34 @@ namespace UniversalistDergiRC.Model
             }
         }
 
-        public int PageCount
+        public string SpotDescription
         {
             get
             {
-                return _pageCount;
+                return _spotDescription;
             }
             set
             {
-                if (_pageCount != value)
+                if (_spotDescription != value)
                 {
-                    _pageCount = value;
-                    OnPropertyChanged(() => PageCount);
+                    _spotDescription = value;
+                    OnPropertyChanged(() => SpotDescription);
+                }
+            }
+        }
+
+        public string Title
+        {
+            get
+            {
+                return _title;
+            }
+            set
+            {
+                if (_title != value)
+                {
+                    _title = value;
+                    OnPropertyChanged(() => Title);
                 }
             }
         }

@@ -5,17 +5,16 @@
              BackgroundColor="#648BAA"
              x:Class="UniversalistDergiRC.Views.BookmarkListView">
     <ContentPage.Content>
-        <Grid>
+        <Grid Margin="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="9*"></RowDefinition>
+                <RowDefinition Height="11*"></RowDefinition>
             </Grid.RowDefinitions>
             <Label Text="İŞARETLEDİKLERİM"
                    Margin="0,0,0,15"
                    HorizontalOptions="FillAndExpand"
                    HorizontalTextAlignment="Center"
                    VerticalTextAlignment="Center"
-                   MinimumHeightRequest="50"
                    BackgroundColor="#80000000"
                    TextColor="White"
                    FontAttributes="Bold"

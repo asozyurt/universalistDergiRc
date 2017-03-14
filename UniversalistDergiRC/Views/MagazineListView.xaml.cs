@@ -10,8 +10,17 @@ namespace UniversalistDergiRC.Views
         public MagazineListView(NavigationController controller)
         {
             InitializeComponent();
-            BindingContext = new MagazineListViewModel(controller);
+            var b = new MagazineListViewModel(controller);
+            BindingContext = b;
             MessagingCenter.Subscribe<MagazineListViewModel>(this, Constants.CONNECTION_ERROR_MESSAGEKEY, showMessage);
+
+            //lstMagazines.ItemSelected += (sender, e) => {
+            //    if (e.SelectedItem == null) return; // don't do anything if we just de-selected the row
+            //                                        // do something with e.SelectedItem
+            //    b.openSelectedMagazine(e.SelectedItem);
+            //    ((ListView)sender).SelectedItem = null; // de-select the row
+            //};
+
         }
 
         private void showMessage(MagazineListViewModel obj)

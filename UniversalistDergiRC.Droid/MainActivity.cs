@@ -5,8 +5,9 @@ using Android.OS;
 
 namespace UniversalistDergiRC.Droid
 {
-    [Activity(ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    //[Activity(ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 
+    [Activity(MainLauncher = false)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {
         UniversalistDergiRC.App loadedApp;
@@ -18,6 +19,9 @@ namespace UniversalistDergiRC.Droid
             global::Xamarin.Forms.Forms.SetTitleBarVisibility(Xamarin.Forms.AndroidTitleBarVisibility.Never);
             loadedApp = new UniversalistDergiRC.App();
             LoadApplication(loadedApp);
+            //if (this.ActionBar != null)
+            //    this.ActionBar.SetIcon(Android.Resource.Color.Transparent);
+
         }
 
         public override void OnBackPressed()

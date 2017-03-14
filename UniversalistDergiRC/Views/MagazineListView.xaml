@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:UniversalistDergiRC.ViewModels;assembly=UniversalistDergiRC"
              x:Name="MagazineListPage"
-             Title="UNIVERSALIST SAYILAR"
+             Title="UNIVERSALIST DERGİ"
              xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
              BackgroundImage="listBackground.png"
              x:Class="UniversalistDergiRC.Views.MagazineListView">
@@ -11,15 +11,45 @@
         <StackLayout>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="10" />
-                    <RowDefinition Height="3*" />
-                    <RowDefinition Height="7*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="8*" />
+                    <RowDefinition Height="18*" />
                 </Grid.RowDefinitions>
+
+                <!--Navigation Grid-->
+                <Grid Padding="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Image="masterMenu.png"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Fill"
+                            Command="{Binding OpenMasterCommand}"
+                            BackgroundColor="Transparent"></Button>
+                    <Label Grid.Column="1"
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           FontSize="16"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           Text="{Binding NavigationTitle}"></Label>
+                    <Button Grid.Column="2"
+                            HorizontalOptions="End"
+                            VerticalOptions="Fill"
+                            Command="{Binding OpenReadingPageCommand}"
+                            Image="openReadingPage.png"
+                            IsVisible="{Binding IsOpenReadingPageVisible}"
+                            BackgroundColor="Transparent"></Button>
+                </Grid>
 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="6*" />
+                        <ColumnDefinition Width="5*" />
 
                     </Grid.ColumnDefinitions>
                     <cv:CarouselView ItemsSource="{Binding MagazineIssueList}"
@@ -29,12 +59,12 @@
                             <DataTemplate>
                                 <Grid>
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="5*" />
                                         <RowDefinition Height="*" />
-                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <Image Grid.RowSpan="2"
                                            Aspect="AspectFit"
-                                           Source="{Binding CoverPage.SourceURL}" />
+                                           Source="{Binding CoverPage.PageSource}" />
                                     <StackLayout Grid.Row="1"
                                                  BackgroundColor="#80000000"
                                                  Padding="7">
@@ -48,48 +78,48 @@
                             </DataTemplate>
                         </cv:CarouselView.ItemTemplate>
                     </cv:CarouselView>
-                    <Button BackgroundColor="Transparent"
-                            VerticalOptions="Start"
-                            Margin="0,-20,0,0"
-                            Command="{Binding OpenMasterPageCommand}"
-                            Image="masterPage.png" />
+                
 
                 </Grid>
 
 
                 <StackLayout Orientation="Vertical"
                              Grid.Row="2"
-                             HorizontalOptions="FillAndExpand">
+                             VerticalOptions="Fill"
+                             HorizontalOptions="Fill">
 
                     <Label Text="İlgili sayıyı okumak için listeden seçim yapabilirsiniz"
-                           Margin="1,2,1,2"
+                           Margin="1"
                            HorizontalOptions="Center"
                            TextColor="White"
                            FontAttributes="Italic"
                            FontSize="Small"></Label>
-                    <ListView HasUnevenRows="True"
-                              x:Name="lstMagazines"
+                    <ListView x:Name="lstMagazines"
                               SeparatorColor="Navy"
+                              VerticalOptions="CenterAndExpand"
+                              HasUnevenRows="True"
+                              SelectedItem="{Binding SelectedMagazine,Mode=TwoWay}"
                               ItemsSource="{Binding MagazineIssueList}"
                               IsPullToRefreshEnabled="True"
-                              RefreshCommand="{Binding Path=BindingContext.RefreshCommand,
-                       Source={x:Reference MagazineListPage}}"
-                              SelectedItem="{Binding SelectedMagazine,Mode=TwoWay,UpdateSourceEventName=PropertyChanged}"
+                              RefreshCommand="{Binding Path=BindingContext.RefreshCommand, Source={x:Reference MagazineListPage}}"
                               IsRefreshing="{Binding IsRefreshing, Mode=OneWay}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Grid Margin="5,4,5,4">
+                                    <Grid >
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="3*" />
-                                            <ColumnDefinition Width="7*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="5*" />
                                         </Grid.ColumnDefinitions>
+
                                         <Image Grid.Column="0"
+                                               Scale="0.6"
+                                               Rotation="-10"
                                                BackgroundColor="Transparent"
-                                               Source="{Binding CoverPage.SourceURL}"
-                                               Margin="5,1,1,5" />
+                                               Source="{Binding CoverPage.PageSource}"
+                                               Margin="1" />
                                         <StackLayout Grid.Column="1"
-                                                     Margin="5,1,1,5"
+                                                     Margin="1"
                                                      VerticalOptions="Center"
                                                      HorizontalOptions="StartAndExpand">
                                             <Label Text="{Binding Title}"
@@ -105,12 +135,6 @@
                                         </StackLayout>
 
                                     </Grid>
-                                    <ViewCell.ContextActions>
-                                        <MenuItem Text="OKU"
-                                                  CommandParameter="{Binding}"
-                                                  Command="{Binding Path=BindingContext.OpenReadingPageCommand,
-                          Source={x:Reference MagazineListPage}}"></MenuItem>
-                                    </ViewCell.ContextActions>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>

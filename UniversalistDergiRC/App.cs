@@ -28,29 +28,25 @@ namespace UniversalistDergiRC
         protected override void OnStart()
         {
             // Handle when your app starts
-            CarouselPage detailCarousel = new CarouselPage();
-            CarouselPage menuCarousel = new CarouselPage();
 
             MagazineListView magazineListView = new MagazineListView(navigationController);
+            NavigationPage magazineList = new NavigationPage(magazineListView) { BackgroundColor = Color.FromHex("#80000000") };
 
+            CarouselPage menuCarousel = new CarouselPage();
             MenuView menuView = new MenuView(navigationController);
             menuCarousel.Title = Constants.UNIVERSALIST_DERGI_TITLE;
             menuCarousel.Children.Add(menuView);
 
-            TabbedPage detailTabPage = new TabbedPage();
-
-            detailTabPage.BarBackgroundColor = Color.FromHex("#80000000");
-            detailTabPage.Children.Add(magazineListView);
-
             MasterDetailPage masterDetail = new MasterDetailPage()
             {
                 Master = menuCarousel,
-                Detail = detailTabPage
+                Detail = magazineList,
+                Title = Constants.UNIVERSALIST_DERGI_TITLE
             };
-            masterDetail.Title = Constants.UNIVERSALIST_DERGI_TITLE;
-            masterDetail.MasterBehavior = MasterBehavior.SplitOnPortrait;
+
             masterDetail.IsPresentedChanged += IsPresentedChanged;
-            navigationController.InitializeController(masterDetail, detailTabPage, menuCarousel);
+            navigationController.InitializeController(masterDetail, magazineList, menuCarousel);
+
             MainPage = masterDetail;
         }
 

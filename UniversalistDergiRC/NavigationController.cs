@@ -1,5 +1,4 @@
-﻿using System;
-using UniversalistDergiRC.ViewModels;
+﻿using UniversalistDergiRC.ViewModels;
 using UniversalistDergiRC.Views;
 using Xamarin.Forms;
 
@@ -7,38 +6,35 @@ namespace UniversalistDergiRC
 {
     public class NavigationController
     {
-        private TabbedPage detailTabPage;
+        private NavigationPage magazineListPage;
         private MasterDetailPage mainPage;
         private CarouselPage menuCarouselPage;
+        private ContentPage readingPage;
 
-        public void InitializeController(MasterDetailPage mainMasterDetail, TabbedPage detailCarousel, CarouselPage menuCarousel)
+        public void InitializeController(MasterDetailPage mainMasterDetail, NavigationPage magazineList, CarouselPage menuCarousel)
         {
             menuCarouselPage = menuCarousel;
-            detailTabPage = detailCarousel;
+            magazineListPage = magazineList;
             mainPage = mainMasterDetail;
         }
 
         public void OpenReadingPage(int issueNumber, int pageNumber)
         {
-            if (detailTabPage == null || issueNumber == 0)
+            if (readingPage == null)
+            {
+                readingPage = new ReadingPageView(this);
+            }
+
+            if ((magazineListPage.CurrentPage as ReadingPageView) != null)
                 return;
-
-            if (detailTabPage.Children.Count == 1)
-                detailTabPage.Children.Add(new ReadingPageView(this));
-
-            ReadingPageView readingPage = detailTabPage.Children[1] as ReadingPageView;
-
-            if (readingPage == null) return;
-
             mainPage.IsPresented = false;
 
             ReadingPageViewModel vmReadingPage = readingPage.BindingContext as ReadingPageViewModel;
             if (vmReadingPage == null) return;
-            detailTabPage.IsBusy = true;
-            vmReadingPage.OpenMagazine(issueNumber, pageNumber);
-            detailTabPage.IsBusy = false;
 
-            detailTabPage.CurrentPage = detailTabPage.Children[1];
+            vmReadingPage.OpenMagazine(issueNumber, pageNumber);
+
+            magazineListPage.Navigation.PushAsync(readingPage);
         }
 
         internal void CloseBookmarkListPage()
@@ -50,7 +46,7 @@ namespace UniversalistDergiRC
 
         internal bool IsMagazineListActive()
         {
-            return detailTabPage != null && (detailTabPage.CurrentPage as MagazineListView) != null;
+            return (magazineListPage.CurrentPage as MagazineListView) != null;
         }
 
         internal void OpenBookmarkListPage()
@@ -77,19 +73,25 @@ namespace UniversalistDergiRC
 
         internal void OpenMagazineListPage()
         {
-            if (detailTabPage == null || detailTabPage.Children.Count == 0)
-                return;
             mainPage.IsPresented = false;
-            detailTabPage.CurrentPage = detailTabPage.Children[0];
-
-            if (detailTabPage.Children.Count > 1)
-                detailTabPage.Children.RemoveAt(1);
+            if (!IsMagazineListActive())
+            {
+                magazineListPage.PopToRootAsync();
+            }
         }
 
         internal void OpenMasterPage()
         {
-            if (mainPage != null && !mainPage.IsPresented)
-                mainPage.IsPresented = true;
+            mainPage.IsPresented = true;
+        }
+
+        internal void OpenReadingPageForContinue()
+        {
+            mainPage.IsPresented = false;
+            if (IsMagazineListActive())
+            {
+                magazineListPage.PushAsync(readingPage);
+            }
         }
     }
 }

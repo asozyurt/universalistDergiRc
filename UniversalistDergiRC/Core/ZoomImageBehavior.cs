@@ -1,6 +1,6 @@
 ﻿/*
  Ahmet Selçuk Özyurt
- 02.02.2017
+ 13.03.2017
  www.asozyurt.com
  Zoom In-Zoom Out Image with Xamarin Forms
  
@@ -9,7 +9,7 @@
  */
 
 using System;
-using System.ComponentModel;
+using UniversalistDergiRC.Repositories;
 using Xamarin.Forms;
 
 namespace UniversalistDergiRC.Core
@@ -17,15 +17,56 @@ namespace UniversalistDergiRC.Core
     public class ZoomImageBehavior : Behavior<View>
     {
         #region Fields
+        private View _associatedObject;
         private double _currentScale = 1, _startScale = 1, _xOffset, _yOffset;
 
+        private PanGestureRecognizer _panGestureRecognizer;
+        private ContentView _parent;
         private PinchGestureRecognizer _pinchGestureRecognizer;
         private TapGestureRecognizer _tapGestureRecognizer;
-        private PanGestureRecognizer _panGestureRecognizer;
 
-        private ContentView _parent;
-        private View _associatedObject;
+        long panStartTime, panEndTime;
+        double panStartX, panStartY;
+        
         #endregion
+
+        public double Clamp(double self, double min, double max)
+        {
+            return Math.Min(max, Math.Max(self, min));
+        }
+
+        internal void ResetToDefaultPosition()
+        {
+            _parent.Content.TranslationX = 0;
+            _parent.Content.TranslationY = 0;
+
+            _parent.Content.Scale = 1;
+            _currentScale = 1;
+            _xOffset = 0;
+            _yOffset = 0;
+        }
+
+        protected override void OnAttachedTo(View associatedObject)
+        {
+            InitializeRecognizers();
+            _associatedObject = associatedObject;
+            InitializeEvents();
+
+            base.OnAttachedTo(associatedObject);
+        }
+
+        protected override void OnDetachingFrom(View associatedObject)
+        {
+            CleanupEvents();
+
+            _parent = null;
+            _pinchGestureRecognizer = null;
+            _panGestureRecognizer = null;
+            _tapGestureRecognizer = null;
+            _associatedObject = null;
+
+            base.OnDetachingFrom(associatedObject);
+        }
 
         private void AssociatedObjectBindingContextChanged(object sender, EventArgs e)
         {
@@ -53,38 +94,6 @@ namespace UniversalistDergiRC.Core
             _associatedObject.BindingContextChanged -= AssociatedObjectBindingContextChanged;
         }
 
-
-        private void OnTapUpdated(object sender, EventArgs e)
-        {
-            if (_parent == null || !IsScaleEnabled)
-            {
-                return;
-            }
-            // If scale is 1 zoom in for 1.3 scale 
-            if (_parent.Content.Scale == 1)
-            {
-                OnPinchUpdated(this, new PinchGestureUpdatedEventArgs(GestureStatus.Started, 0, new Point(0, 0)));
-                OnPinchUpdated(this, new PinchGestureUpdatedEventArgs(GestureStatus.Running, 1.3, new Point(0, 0)));
-                OnPinchUpdated(this, new PinchGestureUpdatedEventArgs(GestureStatus.Completed, 0, new Point(0, 0)));
-            }
-            // If scale is not 1 set scale to 1 which is its first scale
-            else
-            {
-                ResetToDefaultPosition();
-            }
-        }
-
-        internal void ResetToDefaultPosition()
-        {
-            _parent.Content.TranslationX = 0;
-            _parent.Content.TranslationY = 0;
-
-            _parent.Content.Scale = 1;
-            _currentScale = 1;
-            _xOffset = 0;
-            _yOffset = 0;
-        }
-
         /// <summary>
         /// Initialise the events.
         /// </summary>
@@ -108,28 +117,6 @@ namespace UniversalistDergiRC.Core
             };
         }
 
-        protected override void OnAttachedTo(View associatedObject)
-        {
-            InitializeRecognizers();
-            _associatedObject = associatedObject;
-            InitializeEvents();
-
-            base.OnAttachedTo(associatedObject);
-        }
-
-        protected override void OnDetachingFrom(View associatedObject)
-        {
-            CleanupEvents();
-
-            _parent = null;
-            _pinchGestureRecognizer = null;
-            _panGestureRecognizer = null;
-            _tapGestureRecognizer = null;
-            _associatedObject = null;
-
-            base.OnDetachingFrom(associatedObject);
-        }
-
         private void OnPanUpdated(object sender, PanUpdatedEventArgs e)
         {
             if (_parent == null || !IsTranslateEnabled)
@@ -139,6 +126,11 @@ namespace UniversalistDergiRC.Core
 
             switch (e.StatusType)
             {
+                case GestureStatus.Started:
+                    panStartX = _xOffset;
+                    panStartY = _yOffset;
+                    panStartTime = DateTime.Now.Ticks;
+                    break;
                 case GestureStatus.Running:
                     _parent.Content.TranslationX = _xOffset + e.TotalX;
                     _parent.Content.TranslationY = _yOffset + e.TotalY;
@@ -146,6 +138,26 @@ namespace UniversalistDergiRC.Core
                 case GestureStatus.Completed:
                     _xOffset = _parent.Content.TranslationX;
                     _yOffset = _parent.Content.TranslationY;
+
+                    if (_currentScale == 1)
+                    {
+                        panEndTime = DateTime.Now.Ticks;
+                        if (panEndTime - panStartTime < 1500000)
+                        {
+                            double yDifference = panStartY - _yOffset;
+                            double xDifference = panStartX - _xOffset;
+
+                            if (yDifference > -75 && yDifference < 75
+                                && (xDifference < -75 || xDifference > 75))
+                            {
+                                // If x is bigger than 0 sliding direction is right, otherwise left
+                                MessagingCenter.Send(this, xDifference > 0 ? Constants.RIGHT_SLIDE : Constants.LEFT_SLIDE);
+                            }
+                            panStartX = 0;
+                            panStartY = 0;
+                        }
+
+                    }
                     break;
             }
         }
@@ -193,11 +205,25 @@ namespace UniversalistDergiRC.Core
             }
         }
 
-        public double Clamp(double self, double min, double max)
+        private void OnTapUpdated(object sender, EventArgs e)
         {
-            return Math.Min(max, Math.Max(self, min));
+            if (_parent == null || !IsScaleEnabled)
+            {
+                return;
+            }
+            // If scale is 1 zoom in for 1.3 scale 
+            if (_parent.Content.Scale == 1)
+            {
+                OnPinchUpdated(this, new PinchGestureUpdatedEventArgs(GestureStatus.Started, 0, new Point(0, 0)));
+                OnPinchUpdated(this, new PinchGestureUpdatedEventArgs(GestureStatus.Running, 1.3, new Point(0, 0)));
+                OnPinchUpdated(this, new PinchGestureUpdatedEventArgs(GestureStatus.Completed, 0, new Point(0, 0)));
+            }
+            // If scale is not 1 set scale to 1 which is its first scale
+            else
+            {
+                ResetToDefaultPosition();
+            }
         }
-
         #region IsScaleEnabled property
         public static readonly BindableProperty IsScaleEnabledProperty =
             BindableProperty.Create("IsScaleEnabled", typeof(bool), typeof(ZoomImageBehavior), default(bool));

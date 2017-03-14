@@ -16,13 +16,17 @@ namespace UniversalistDergiRC.ViewModels
         private ICommand _goFirstPageCommand;
         private ICommand _goNextPageCommand;
         private ICommand _goPreviousPageCommand;
+        private ICommand _returnMagazineListPageCommand;
         private bool _isBookmarked;
         private MagazineDetailModel activeMagazine;
         private NavigationController navigationController;
-
+        private string _readingPageTitle;
         public ReadingPageViewModel(NavigationController navigationController)
         {
             this.navigationController = navigationController;
+            MessagingCenter.Subscribe<ZoomImageBehavior>(this, Constants.RIGHT_SLIDE, handleRightSwipe);
+            MessagingCenter.Subscribe<ZoomImageBehavior>(this, Constants.LEFT_SLIDE, handleLeftSwipe);
+            ReadingPageTitle = Constants.READING_PAGE_INITIAL_TITLE;
         }
 
         public int ActivePageIndex
@@ -146,6 +150,24 @@ namespace UniversalistDergiRC.ViewModels
             }
         }
 
+
+        public ICommand ReturnMagazineListPageCommand
+        {
+            get
+            {
+                _returnMagazineListPageCommand = _returnMagazineListPageCommand ?? new Command(() => navigationController.OpenMagazineListPage());
+                return _returnMagazineListPageCommand;
+            }
+            set
+            {
+                if (_returnMagazineListPageCommand != value)
+                {
+                    _returnMagazineListPageCommand = value;
+                    OnPropertyChanged(() => ReturnMagazineListPageCommand);
+                }
+            }
+        }
+
         public bool IsBookmarked
         {
             get
@@ -162,11 +184,24 @@ namespace UniversalistDergiRC.ViewModels
             }
         }
 
+        public string ReadingPageTitle
+        {
+            get { return _readingPageTitle; }
+            set
+            {
+                if (_readingPageTitle != value)
+                {
+                    _readingPageTitle = value;
+                    OnPropertyChanged(() => ReadingPageTitle);
+                }
+            }
+        }
+
         // Default değeri özellikle sıfır yapmadım, bu metodun sayfa numarasıyla çalışmasını istiyorum.
         internal void OpenMagazine(int issueNumber, int pageNumber = 1)
         {
             activeMagazine = DataAccessManager.GetMagazineIssueDetail(issueNumber);
-
+            ReadingPageTitle = "Universalist " + activeMagazine.Issue + ". Sayı";
             openPage(pageNumber - 1);
         }
 
@@ -200,9 +235,14 @@ namespace UniversalistDergiRC.ViewModels
             openPage(ActivePageIndex - 1);
         }
 
+        private void handleLeftSwipe(ZoomImageBehavior obj)
+        {
+            goPreviousPage(null);
+        }
+
         private void openPage(int pageIndex)
         {
-            
+
             if (pageIndex < 0 || activeMagazine == null || pageIndex >= activeMagazine.Pages.Count)
             {
                 return;
@@ -220,6 +260,9 @@ namespace UniversalistDergiRC.ViewModels
             MessagingCenter.Send(this, Constants.RESET_IMAGE_POSITION_MESSAGEKEY);
         }
 
-      
+        private void handleRightSwipe(ZoomImageBehavior obj)
+        {
+            goNextPage(null);
+        }
     }
 }

@@ -1,4 +1,7 @@
-﻿using UniversalistDergiRC.Core;
+﻿using System;
+using UniversalistDergiRC.Core;
+using UniversalistDergiRC.Repositories;
+using Xamarin.Forms;
 
 namespace UniversalistDergiRC.Model
 {
@@ -19,6 +22,20 @@ namespace UniversalistDergiRC.Model
                     OnPropertyChanged(() => SourceURL);
                 }
             }
+        }
+
+        public UriImageSource PageSource
+        {
+            get
+            {
+                return new UriImageSource
+                {
+                    Uri = string.IsNullOrEmpty(_sourceURL) ? new Uri(Constants.EMPTY_PAGE) : new Uri(_sourceURL),
+                    CachingEnabled = true,
+                    CacheValidity = Constants.DEFAULT_CACHE_VALIDITY
+                };
+            }
+
         }
 
         public bool IsBookMarked

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using UniversalistDergiRC.Core;
 using UniversalistDergiRC.DataAccess;
@@ -11,9 +10,12 @@ namespace UniversalistDergiRC.ViewModels
 {
     public class MagazineListViewModel : BaseModel
     {
+        private bool _isOpenReadingPageVisible;
         private bool _isRefreshing;
         private ObservableCollection<MagazineSummaryModel> _magazineIssueList;
         private NavigationController _navigationController;
+        private string _navigationTitle;
+        private ICommand _openMasterCommand;
         private ICommand _openReadingPageCommand;
         private ICommand _refreshCommand;
         private MagazineSummaryModel selectedMagazine;
@@ -22,6 +24,20 @@ namespace UniversalistDergiRC.ViewModels
         {
             _navigationController = controller;
             refreshMagazineIssueList(true);
+            NavigationTitle = Constants.UNIVERSALIST_DERGI_TITLE_UPPERCASE;
+        }
+
+        public bool IsOpenReadingPageVisible
+        {
+            get { return _isOpenReadingPageVisible; }
+            set
+            {
+                if (_isOpenReadingPageVisible != value)
+                {
+                    _isOpenReadingPageVisible = value;
+                    OnPropertyChanged(() => IsOpenReadingPageVisible);
+                }
+            }
         }
 
         public bool IsRefreshing
@@ -55,11 +71,41 @@ namespace UniversalistDergiRC.ViewModels
             }
         }
 
+        public string NavigationTitle
+        {
+            get { return _navigationTitle; }
+            set
+            {
+                if (_navigationTitle != value)
+                {
+                    _navigationTitle = value;
+                    OnPropertyChanged(() => NavigationTitle);
+                }
+            }
+        }
+
+        public ICommand OpenMasterCommand
+        {
+            get
+            {
+                _openMasterCommand = _openMasterCommand ?? new Command(() => _navigationController.OpenMasterPage());
+                return _openMasterCommand;
+            }
+            set
+            {
+                if (_openMasterCommand != value)
+                {
+                    _openMasterCommand = value;
+                    OnPropertyChanged(() => OpenMasterCommand);
+                }
+            }
+        }
+
         public ICommand OpenReadingPageCommand
         {
             get
             {
-                _openReadingPageCommand = _openReadingPageCommand ?? new Command(openSelectedMagazine);
+                _openReadingPageCommand = _openReadingPageCommand ?? new Command(openReadingPage);
                 return _openReadingPageCommand;
             }
             set
@@ -70,29 +116,6 @@ namespace UniversalistDergiRC.ViewModels
                     OnPropertyChanged(() => OpenReadingPageCommand);
                 }
             }
-        }
-
-        private ICommand _openMasterPageCommand;
-            public ICommand OpenMasterPageCommand
-        {
-            get
-            {
-                _openMasterPageCommand = _openMasterPageCommand ?? new Command(openMasterPage);
-                return _openMasterPageCommand;
-            }
-            set
-            {
-                if (_openMasterPageCommand != value)
-                {
-                    _openMasterPageCommand = value;
-                    OnPropertyChanged(() => OpenMasterPageCommand);
-                }
-            }
-        }
-
-        private void openMasterPage()
-        {
-            _navigationController.OpenMasterPage();
         }
 
         public ICommand RefreshCommand
@@ -124,20 +147,25 @@ namespace UniversalistDergiRC.ViewModels
                 {
                     selectedMagazine = value;
                     openSelectedMagazine(selectedMagazine);
-                    OnPropertyChanged(() => SelectedMagazine);
                 }
+                OnPropertyChanged(() => SelectedMagazine);
             }
         }
 
-        private void openSelectedMagazine(object obj)
+        public void openSelectedMagazine(object obj)
         {
-            MagazineSummaryModel selectedMagazine = obj as MagazineSummaryModel;
-            if (SelectedMagazine == null)
+            MagazineSummaryModel selection = obj as MagazineSummaryModel;
+            if (selection == null)
                 return;
 
-            _navigationController.OpenReadingPage(selectedMagazine.Issue, Constants.FIRST_PAGE_NUMBER);
-
+            _navigationController.OpenReadingPage(selection.Issue, Constants.FIRST_PAGE_NUMBER);
+            IsOpenReadingPageVisible = true;
             SelectedMagazine = null;
+        }
+
+        private void openReadingPage(object obj)
+        {
+            _navigationController.OpenReadingPageForContinue();
         }
 
         private void refreshMagazineIssueList(bool tryLocal)

@@ -13,7 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\ZoomImageBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataAccess\ClientDataManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataAccess\DataAccessManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DataAccess\ISaveAndLoad.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataAccess\IFileOperations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\BaseModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\BookmarkModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\MagazineDetailModel.cs" />
@@ -59,6 +59,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Repositories\unv_sayilar.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Repositories\unv_sayilar_xml_format.xml" />
   </ItemGroup>
 </Project>
