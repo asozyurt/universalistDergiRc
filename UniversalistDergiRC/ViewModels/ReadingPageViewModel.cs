@@ -16,11 +16,13 @@ namespace UniversalistDergiRC.ViewModels
         private ICommand _goFirstPageCommand;
         private ICommand _goNextPageCommand;
         private ICommand _goPreviousPageCommand;
-        private ICommand _returnMagazineListPageCommand;
         private bool _isBookmarked;
+        private bool _isNextPageVisible;
+        private bool _isPreviousPageVisible;
+        private string _readingPageTitle;
+        private ICommand _returnMagazineListPageCommand;
         private MagazineDetailModel activeMagazine;
         private NavigationController navigationController;
-        private string _readingPageTitle;
         public ReadingPageViewModel(NavigationController navigationController)
         {
             this.navigationController = navigationController;
@@ -151,23 +153,6 @@ namespace UniversalistDergiRC.ViewModels
         }
 
 
-        public ICommand ReturnMagazineListPageCommand
-        {
-            get
-            {
-                _returnMagazineListPageCommand = _returnMagazineListPageCommand ?? new Command(() => navigationController.OpenMagazineListPage());
-                return _returnMagazineListPageCommand;
-            }
-            set
-            {
-                if (_returnMagazineListPageCommand != value)
-                {
-                    _returnMagazineListPageCommand = value;
-                    OnPropertyChanged(() => ReturnMagazineListPageCommand);
-                }
-            }
-        }
-
         public bool IsBookmarked
         {
             get
@@ -184,6 +169,34 @@ namespace UniversalistDergiRC.ViewModels
             }
         }
 
+        public bool IsNextPageVisible
+        {
+            get
+            {
+                return _isNextPageVisible;
+            }
+
+            set
+            {
+                _isNextPageVisible = value;
+                OnPropertyChanged(() => IsNextPageVisible);
+            }
+        }
+
+        public bool IsPreviousPageVisible
+        {
+            get
+            {
+                return _isPreviousPageVisible;
+            }
+
+            set
+            {
+                _isPreviousPageVisible = value;
+                OnPropertyChanged(() => IsPreviousPageVisible);
+            }
+        }
+
         public string ReadingPageTitle
         {
             get { return _readingPageTitle; }
@@ -197,6 +210,22 @@ namespace UniversalistDergiRC.ViewModels
             }
         }
 
+        public ICommand ReturnMagazineListPageCommand
+        {
+            get
+            {
+                _returnMagazineListPageCommand = _returnMagazineListPageCommand ?? new Command(() => navigationController.OpenMagazineListPage());
+                return _returnMagazineListPageCommand;
+            }
+            set
+            {
+                if (_returnMagazineListPageCommand != value)
+                {
+                    _returnMagazineListPageCommand = value;
+                    OnPropertyChanged(() => ReturnMagazineListPageCommand);
+                }
+            }
+        }
         // Default değeri özellikle sıfır yapmadım, bu metodun sayfa numarasıyla çalışmasını istiyorum.
         internal void OpenMagazine(int issueNumber, int pageNumber = 1)
         {
@@ -240,6 +269,11 @@ namespace UniversalistDergiRC.ViewModels
             goPreviousPage(null);
         }
 
+        private void handleRightSwipe(ZoomImageBehavior obj)
+        {
+            goNextPage(null);
+        }
+
         private void openPage(int pageIndex)
         {
 
@@ -257,12 +291,10 @@ namespace UniversalistDergiRC.ViewModels
                 CacheValidity = Constants.DEFAULT_CACHE_VALIDITY
             };
 
-            MessagingCenter.Send(this, Constants.RESET_IMAGE_POSITION_MESSAGEKEY);
-        }
+            IsPreviousPageVisible = ActivePageIndex > 0;
+            IsNextPageVisible = ActivePageIndex < activeMagazine.Pages.Count - 1;
 
-        private void handleRightSwipe(ZoomImageBehavior obj)
-        {
-            goNextPage(null);
+            MessagingCenter.Send(this, Constants.RESET_IMAGE_POSITION_MESSAGEKEY);
         }
     }
 }

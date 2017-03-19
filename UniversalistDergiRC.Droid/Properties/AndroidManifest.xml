@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" package="com.harweast.universalistDergi" android:versionCode="2" android:versionName="2">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" package="com.harweast.universalistDergi" android:versionCode="3" android:versionName="Beta V3">
 	<uses-sdk android:minSdkVersion="19" />
 	<application android:label="Universalist Dergi" android:icon="@drawable/Icon"></application>
 </manifest>

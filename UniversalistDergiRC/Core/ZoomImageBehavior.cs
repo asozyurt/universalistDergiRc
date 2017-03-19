@@ -148,7 +148,7 @@ namespace UniversalistDergiRC.Core
                             double xDifference = panStartX - _xOffset;
 
                             if (yDifference > -75 && yDifference < 75
-                                && (xDifference < -75 || xDifference > 75))
+                                && (xDifference < -50 || xDifference > 50))
                             {
                                 // If x is bigger than 0 sliding direction is right, otherwise left
                                 MessagingCenter.Send(this, xDifference > 0 ? Constants.RIGHT_SLIDE : Constants.LEFT_SLIDE);

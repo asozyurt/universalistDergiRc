@@ -4081,76 +4081,73 @@ namespace UniversalistDergiRC.Droid
 			public const int masterMenu = 2130837657;
 			
 			// aapt resource value: 0x7f02009a
-			public const int masterPage = 2130837658;
+			public const int mr_dialog_material_background_dark = 2130837658;
 			
 			// aapt resource value: 0x7f02009b
-			public const int mr_dialog_material_background_dark = 2130837659;
+			public const int mr_dialog_material_background_light = 2130837659;
 			
 			// aapt resource value: 0x7f02009c
-			public const int mr_dialog_material_background_light = 2130837660;
+			public const int mr_ic_audiotrack_light = 2130837660;
 			
 			// aapt resource value: 0x7f02009d
-			public const int mr_ic_audiotrack_light = 2130837661;
+			public const int mr_ic_cast_dark = 2130837661;
 			
 			// aapt resource value: 0x7f02009e
-			public const int mr_ic_cast_dark = 2130837662;
+			public const int mr_ic_cast_light = 2130837662;
 			
 			// aapt resource value: 0x7f02009f
-			public const int mr_ic_cast_light = 2130837663;
+			public const int mr_ic_close_dark = 2130837663;
 			
 			// aapt resource value: 0x7f0200a0
-			public const int mr_ic_close_dark = 2130837664;
+			public const int mr_ic_close_light = 2130837664;
 			
 			// aapt resource value: 0x7f0200a1
-			public const int mr_ic_close_light = 2130837665;
+			public const int mr_ic_media_route_connecting_mono_dark = 2130837665;
 			
 			// aapt resource value: 0x7f0200a2
-			public const int mr_ic_media_route_connecting_mono_dark = 2130837666;
+			public const int mr_ic_media_route_connecting_mono_light = 2130837666;
 			
 			// aapt resource value: 0x7f0200a3
-			public const int mr_ic_media_route_connecting_mono_light = 2130837667;
+			public const int mr_ic_media_route_mono_dark = 2130837667;
 			
 			// aapt resource value: 0x7f0200a4
-			public const int mr_ic_media_route_mono_dark = 2130837668;
+			public const int mr_ic_media_route_mono_light = 2130837668;
 			
 			// aapt resource value: 0x7f0200a5
-			public const int mr_ic_media_route_mono_light = 2130837669;
+			public const int mr_ic_pause_dark = 2130837669;
 			
 			// aapt resource value: 0x7f0200a6
-			public const int mr_ic_pause_dark = 2130837670;
+			public const int mr_ic_pause_light = 2130837670;
 			
 			// aapt resource value: 0x7f0200a7
-			public const int mr_ic_pause_light = 2130837671;
+			public const int mr_ic_play_dark = 2130837671;
 			
 			// aapt resource value: 0x7f0200a8
-			public const int mr_ic_play_dark = 2130837672;
+			public const int mr_ic_play_light = 2130837672;
 			
 			// aapt resource value: 0x7f0200a9
-			public const int mr_ic_play_light = 2130837673;
-			
-			// aapt resource value: 0x7f0200aa
-			public const int nextPage = 2130837674;
-			
-			// aapt resource value: 0x7f0200b1
-			public const int notification_template_icon_bg = 2130837681;
-			
-			// aapt resource value: 0x7f0200ab
-			public const int openReadingPage = 2130837675;
-			
-			// aapt resource value: 0x7f0200ac
-			public const int previousPage = 2130837676;
-			
-			// aapt resource value: 0x7f0200ad
-			public const int savedBookmark = 2130837677;
-			
-			// aapt resource value: 0x7f0200ae
-			public const int savedBookmarkMini = 2130837678;
-			
-			// aapt resource value: 0x7f0200af
-			public const int splash = 2130837679;
+			public const int nextPage = 2130837673;
 			
 			// aapt resource value: 0x7f0200b0
-			public const int website = 2130837680;
+			public const int notification_template_icon_bg = 2130837680;
+			
+			// aapt resource value: 0x7f0200aa
+			public const int openReadingPage = 2130837674;
+			
+			// aapt resource value: 0x7f0200ab
+			public const int previousPage = 2130837675;
+			
+			// aapt resource value: 0x7f0200ac
+			public const int savedBookmark = 2130837676;
+			
+			// aapt resource value: 0x7f0200ad
+			public const int savedBookmarkMini = 2130837677;
+			
+			// aapt resource value: 0x7f0200ae
+			public const int splash = 2130837678;
+			
+			// aapt resource value: 0x7f0200af
+			public const int website = 2130837679;
 			
 			static Drawable()
 			{

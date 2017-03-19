@@ -69,7 +69,7 @@
                                 BackgroundColor="Transparent"
                                 Command="{Binding OpenOfficialSiteCommand}"
                                 Grid.Row="2"></Button>
-                        <Button Text="UNIVERSALIST DERGİ"
+                        <Button Text="UNIVERSALIST DERGİ WEB"
                                 BackgroundColor="Transparent"
                                 Grid.Column="1"
                                 Grid.Row="2"

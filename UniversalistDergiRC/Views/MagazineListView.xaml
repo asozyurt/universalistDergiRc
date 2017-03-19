@@ -12,8 +12,8 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*" />
-                    <RowDefinition Height="8*" />
-                    <RowDefinition Height="18*" />
+                    <RowDefinition Height="7*" />
+                    <RowDefinition Height="19*" />
                 </Grid.RowDefinitions>
 
                 <!--Navigation Grid-->
@@ -47,13 +47,7 @@
                 </Grid>
 
                 <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="5*" />
-
-                    </Grid.ColumnDefinitions>
                     <cv:CarouselView ItemsSource="{Binding MagazineIssueList}"
-                                     Grid.ColumnSpan="2"
                                      x:Name="IssuesCarousel">
                         <cv:CarouselView.ItemTemplate>
                             <DataTemplate>
@@ -67,7 +61,7 @@
                                            Source="{Binding CoverPage.PageSource}" />
                                     <StackLayout Grid.Row="1"
                                                  BackgroundColor="#80000000"
-                                                 Padding="7">
+                                                 Padding="2">
                                         <Label TextColor="White"
                                                Text="{Binding SpotDescription}"
                                                FontSize="14"
@@ -78,7 +72,7 @@
                             </DataTemplate>
                         </cv:CarouselView.ItemTemplate>
                     </cv:CarouselView>
-                
+
 
                 </Grid>
 
@@ -106,7 +100,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Grid >
+                                    <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="5*" />

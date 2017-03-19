@@ -57,6 +57,7 @@
                         HorizontalOptions="Fill"
                         Grid.Column="0"
                         Image="previousPage.png"
+                        IsVisible="{Binding IsPreviousPageVisible}"
                         Command="{Binding GoPreviousPageCommand}" />
                 <Button x:Name="btnNextPage"
                         Grid.Column="2"
@@ -64,6 +65,7 @@
                         Image="nextPage.png"
                         Margin="0,0,5,0"
                         Command="{Binding GoNextPageCommand}"
+                        IsVisible="{Binding IsNextPageVisible}"
                         BackgroundColor="#80000000">
                 </Button>
             </Grid>
@@ -77,7 +79,7 @@
             <Button Image="back.png"
                     Command="{Binding ReturnMagazineListPageCommand}"
                     HorizontalOptions="Start"
-                    VerticalOptions="Center"
+                    VerticalOptions="Fill"
                     BackgroundColor="Transparent"></Button>
             <Label Grid.Column="1"
                    TextColor="White"
@@ -90,8 +92,8 @@
                    Text="{Binding ReadingPageTitle}"></Label>
             <Button BackgroundColor="Transparent"
                     HorizontalOptions="End"
+                    VerticalOptions="Fill"
                     Grid.Column="2"
-                    VerticalOptions="Center"
                     Image="{Binding BookmarkIcon}"
                     Command="{Binding AddOrRemoveBookmarkCommand}" />
         </Grid>

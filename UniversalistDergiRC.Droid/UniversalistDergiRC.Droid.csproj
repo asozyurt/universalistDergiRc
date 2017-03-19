@@ -184,9 +184,6 @@
     <AndroidResource Include="Resources\Drawable\website.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\masterPage.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\Drawable\iconSmall.png" />
   </ItemGroup>
   <ItemGroup>
