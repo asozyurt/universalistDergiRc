@@ -122,37 +122,7 @@ namespace UniversalistDergiRC.DataAccess
             return result;
 
         }
-
-        internal static BookmarkModel GetState()
-        {
-            BookmarkModel savedState = null;
-            try
-            {
-                string state = DependencyService.Get<IFileOperations>().ReadAllText(Constants.TEMP_FILENAME);
-
-                string[] stateArray = state.Split(new[] { Constants.ITEM_SEPERATOR }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (var item in stateArray)
-                {
-                    savedState = BookmarkModel.GenerateFromSerializedText(item);
-                }
-            }
-            catch (Exception) { }
-
-            return savedState;
-
-        }
-
-        internal static void SaveState(string state)
-        {
-            state = state ?? string.Empty;
-
-            try
-            {
-                DependencyService.Get<IFileOperations>().SaveText(Constants.TEMP_FILENAME, state);
-            }
-            catch (Exception) { }
-        }
-
+        
         internal static void UpdateMagazineIssues(IEnumerable<MagazineSummaryModel> magazineIssueList)
         {
             StringBuilder sb = new StringBuilder();

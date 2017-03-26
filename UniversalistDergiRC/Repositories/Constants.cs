@@ -17,7 +17,6 @@ namespace UniversalistDergiRC.Repositories
 
         public static readonly string BOOKMARKS_FILENAME = "Bookmarks.aso";
         public static readonly string ISSUES_FILENAME = "Issues.aso";
-        public static readonly string TEMP_FILENAME = "Temp.aso";
 
         public static readonly string MAGAZINE_SUMMARY_LIST_URL = "http://www.harweast.com/Projects/universalist_dergi/unv_sayilar.xml";
         public static readonly string GENERIC_MAGAZINE_PAGES_URL = "http://www.harweast.com/Projects/universalist_dergi/Sayi{0}/{0}-{1}.jpg";
@@ -25,7 +24,7 @@ namespace UniversalistDergiRC.Repositories
         public static readonly string BOOKMARK_NORMAL_ICON = "bookmark.png";
         public static readonly string BOOKMARK_SAVED_ICON = "savedBookmark.png";
 
-        public static readonly TimeSpan DEFAULT_CACHE_VALIDITY = new TimeSpan(3, 0, 0, 0);
+        public static readonly TimeSpan DEFAULT_CACHE_VALIDITY = new TimeSpan(90, 0, 0, 0);
 
         public static readonly string EMPTY_PAGE = "http://www.harweast.com/Projects/universalist_dergi/empty_page.png";
 
