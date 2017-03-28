@@ -52,5 +52,7 @@
 	<true/>
 	<key>UIStatusBarHidden~ipad</key>
 	<true/>
+	<key>UIMainStoryboardFile~ipad</key>
+	<string>LaunchScreen</string>
 </dict>
 </plist>
