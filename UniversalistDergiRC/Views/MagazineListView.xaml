@@ -7,135 +7,130 @@
              xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
              BackgroundImage="listBackground.png"
              x:Class="UniversalistDergiRC.Views.MagazineListView">
-    <ContentPage.Content>
-        <StackLayout>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*" />
-                    <RowDefinition Height="7*" />
-                    <RowDefinition Height="19*" />
-                </Grid.RowDefinitions>
+   <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="7*" />
+            <RowDefinition Height="19*" />
+        </Grid.RowDefinitions>
 
-                <!--Navigation Grid-->
-                <Grid Padding="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Button Image="masterMenu.png"
-                            HorizontalOptions="Start"
-                            VerticalOptions="Fill"
-                            Command="{Binding OpenMasterCommand}"
-                            BackgroundColor="Transparent"></Button>
-                    <Label Grid.Column="1"
-                           TextColor="White"
-                           FontAttributes="Bold"
-                           FontSize="16"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"
-                           HorizontalTextAlignment="Center"
-                           VerticalTextAlignment="Center"
-                           Text="{Binding NavigationTitle}"></Label>
-                    <Button Grid.Column="2"
-                            HorizontalOptions="End"
-                            VerticalOptions="Fill"
-                            Command="{Binding OpenReadingPageCommand}"
-                            Image="openReadingPage.png"
-                            IsVisible="{Binding IsOpenReadingPageVisible}"
-                            BackgroundColor="Transparent"></Button>
-                </Grid>
+        <!--Navigation Grid-->
+        <Grid Padding="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Image="masterMenu.png"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Fill"
+                    Command="{Binding OpenMasterCommand}"
+                    BackgroundColor="Transparent"></Button>
+            <Label Grid.Column="1"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   Text="{Binding NavigationTitle}"></Label>
+            <Button Grid.Column="2"
+                    HorizontalOptions="End"
+                    VerticalOptions="Fill"
+                    Command="{Binding OpenReadingPageCommand}"
+                    Image="openReadingPage.png"
+                    IsVisible="{Binding IsOpenReadingPageVisible}"
+                    BackgroundColor="Transparent"></Button>
+        </Grid>
 
-                <Grid Grid.Row="1">
-                    <cv:CarouselView ItemsSource="{Binding MagazineIssueList}"
-                                     x:Name="IssuesCarousel">
-                        <cv:CarouselView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="5*" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Image Grid.RowSpan="2"
-                                           Aspect="AspectFit"
-                                           Source="{Binding CoverPage.PageSource}" />
-                                    <StackLayout Grid.Row="1"
-                                                 BackgroundColor="#80000000"
-                                                 Padding="2">
-                                        <Label TextColor="White"
-                                               Text="{Binding SpotDescription}"
-                                               FontSize="14"
-                                               HorizontalOptions="Center"
-                                               VerticalOptions="CenterAndExpand" />
-                                    </StackLayout>
-                                </Grid>
-                            </DataTemplate>
-                        </cv:CarouselView.ItemTemplate>
-                    </cv:CarouselView>
+        <Grid Grid.Row="1">
+            <cv:CarouselView ItemsSource="{Binding MagazineIssueList}"
+                             x:Name="IssuesCarousel">
+                <cv:CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Image Grid.RowSpan="2"
+                                   Aspect="AspectFit"
+                                   Source="{Binding CoverPage.PageSource}" />
+                            <StackLayout Grid.Row="1"
+                                         BackgroundColor="#80000000"
+                                         Padding="2">
+                                <Label TextColor="White"
+                                       Text="{Binding SpotDescription}"
+                                       FontSize="14"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="CenterAndExpand" />
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </cv:CarouselView.ItemTemplate>
+            </cv:CarouselView>
 
 
-                </Grid>
+        </Grid>
 
 
-                <StackLayout Orientation="Vertical"
-                             Grid.Row="2"
-                             VerticalOptions="Fill"
-                             HorizontalOptions="Fill">
+        <StackLayout Orientation="Vertical"
+                     Grid.Row="2"
+                     VerticalOptions="Fill"
+                     HorizontalOptions="Fill">
 
-                    <Label Text="İlgili sayıyı okumak için listeden seçim yapabilirsiniz"
-                           Margin="1"
-                           HorizontalOptions="Center"
-                           TextColor="White"
-                           FontAttributes="Italic"
-                           FontSize="Small"></Label>
-                    <ListView x:Name="lstMagazines"
-                              SeparatorColor="Navy"
-                              VerticalOptions="CenterAndExpand"
-                              HasUnevenRows="True"
-                              SelectedItem="{Binding SelectedMagazine,Mode=TwoWay}"
-                              ItemsSource="{Binding MagazineIssueList}"
-                              IsPullToRefreshEnabled="True"
-                              RefreshCommand="{Binding Path=BindingContext.RefreshCommand, Source={x:Reference MagazineListPage}}"
-                              IsRefreshing="{Binding IsRefreshing, Mode=OneWay}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="5*" />
-                                        </Grid.ColumnDefinitions>
+            <Label Text="İlgili sayıyı okumak için listeden seçim yapabilirsiniz"
+                   Margin="1"
+                   HorizontalOptions="Center"
+                   TextColor="White"
+                   FontAttributes="Italic"
+                   FontSize="Small"></Label>
+            <ListView x:Name="lstMagazines"
+                      SeparatorColor="Navy"
+                      VerticalOptions="CenterAndExpand"
+                      HasUnevenRows="True"
+                      SelectedItem="{Binding SelectedMagazine,Mode=TwoWay}"
+                      ItemsSource="{Binding MagazineIssueList}"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding Path=BindingContext.RefreshCommand, Source={x:Reference MagazineListPage}}"
+                      IsRefreshing="{Binding IsRefreshing, Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="5*" />
+                                </Grid.ColumnDefinitions>
 
-                                        <Image Grid.Column="0"
-                                               Scale="0.6"
-                                               Rotation="-10"
-                                               BackgroundColor="Transparent"
-                                               Source="{Binding CoverPage.PageSource}"
-                                               Margin="1" />
-                                        <StackLayout Grid.Column="1"
-                                                     Margin="1"
-                                                     VerticalOptions="Center"
-                                                     HorizontalOptions="StartAndExpand">
-                                            <Label Text="{Binding Title}"
-                                                   FontSize="16"
-                                                   FontAttributes="Bold"
-                                                   TextColor="White"></Label>
-                                            <Label Text="{Binding SpotDescription}"
-                                                   FontSize="15"
-                                                   TextColor="White"></Label>
-                                            <Label Text="{Binding Period}"
-                                                   FontSize="14"
-                                                   TextColor="Navy"></Label>
-                                        </StackLayout>
+                                <Image Grid.Column="0"
+                                       Scale="0.6"
+                                       Rotation="-10"
+                                       BackgroundColor="Transparent"
+                                       Source="{Binding CoverPage.PageSource}"
+                                       Margin="1" />
+                                <StackLayout Grid.Column="1"
+                                             Margin="1"
+                                             VerticalOptions="Center"
+                                             HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding Title}"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="White"></Label>
+                                    <Label Text="{Binding SpotDescription}"
+                                           FontSize="15"
+                                           TextColor="White"></Label>
+                                    <Label Text="{Binding Period}"
+                                           FontSize="14"
+                                           TextColor="Navy"></Label>
+                                </StackLayout>
 
-                                    </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackLayout>
-            </Grid>
-
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
-    </ContentPage.Content>
+    </Grid>
 </ContentPage>

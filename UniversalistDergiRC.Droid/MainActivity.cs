@@ -7,7 +7,7 @@ namespace UniversalistDergiRC.Droid
 {
     //[Activity(ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 
-    [Activity(MainLauncher = false)]
+    [Activity(MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {
         UniversalistDergiRC.App loadedApp;

@@ -8,7 +8,7 @@
              x:Class="UniversalistDergiRC.Views.ReadingPageView">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition x:Name="navigationRow" Height="*" />
             <RowDefinition Height="13*" />
         </Grid.RowDefinitions>
 
@@ -25,7 +25,7 @@
                          Grid.RowSpan="2"
                          HorizontalOptions="FillAndExpand">
                 <Image x:Name="imgActivePage"
-                       Aspect="Fill"
+                       Aspect="AspectFit"
                        Source="{Binding ActivePageUrl}">
                     <Image.Behaviors>
                         <bhv:ZoomImageBehavior IsScaleEnabled="True"
@@ -70,6 +70,7 @@
                 </Button>
             </Grid>
         </Grid>
+        
         <Grid BackgroundColor="#80000000" Padding="1" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>

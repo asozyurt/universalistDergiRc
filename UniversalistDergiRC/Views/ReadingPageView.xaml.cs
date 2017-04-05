@@ -13,9 +13,18 @@ namespace UniversalistDergiRC.Views
         public ReadingPageView(NavigationController navigationController)
         {
             InitializeComponent();
+            SizeChanged += OnSizeChanged;
             BindingContext = new ReadingPageViewModel(navigationController);
             MessagingCenter.Subscribe<ReadingPageViewModel>(this, Constants.RESET_IMAGE_POSITION_MESSAGEKEY, resetImagePositionAsync);
             MessagingCenter.Subscribe<ReadingPageViewModel>(this, Constants.ANIMATE_IMAGE_MESSAGEKEY, animateImageAsync);
+        }
+
+        private void OnSizeChanged(object sender, EventArgs e)
+        {
+            if (Height > Width)
+                navigationRow.Height = new GridLength(1, GridUnitType.Star);
+            else
+                navigationRow.Height = new GridLength(2, GridUnitType.Star);
         }
 
         private async void animateImageAsync(ReadingPageViewModel obj)
