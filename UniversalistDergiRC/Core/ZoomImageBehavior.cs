@@ -105,6 +105,7 @@ namespace UniversalistDergiRC.Core
             _panGestureRecognizer.PanUpdated += OnPanUpdated;
             _tapGestureRecognizer.Tapped += OnTapUpdated;
             _associatedObject.BindingContextChanged += AssociatedObjectBindingContextChanged;
+            AssociatedObjectBindingContextChanged(_associatedObject, null);
         }
 
         private void InitializeRecognizers()
