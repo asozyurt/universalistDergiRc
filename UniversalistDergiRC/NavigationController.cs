@@ -25,8 +25,6 @@ namespace UniversalistDergiRC
                 readingPage = new ReadingPageView(this);
             }
 
-            if ((magazineListPage.CurrentPage as ReadingPageView) != null)
-                return;
             mainPage.IsPresented = false;
 
             ReadingPageViewModel vmReadingPage = readingPage.BindingContext as ReadingPageViewModel;
@@ -34,7 +32,8 @@ namespace UniversalistDergiRC
 
             vmReadingPage.OpenMagazine(issueNumber, pageNumber);
 
-            magazineListPage.Navigation.PushAsync(readingPage);
+            if ((magazineListPage.CurrentPage as ReadingPageView) == null)
+                magazineListPage.Navigation.PushAsync(readingPage);
         }
 
         internal void CloseBookmarkListPage()
