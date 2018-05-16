@@ -8,5 +8,5 @@ https://play.google.com/store/apps/details?id=com.harweast.universalistDergi
 
 If any questions, you can contact me from:
 
-https://asozyurt.com/iletisim/
+https://asozyurt.com/
 
